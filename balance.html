@@ -93,15 +93,17 @@
         }
 
         function loadBalances() {
-            fetch('/data/modalidades.json')
-                .then(response => response.json())
-                .then(data => {
-                    const balanceContainer = document.getElementById('balanceContainer');
-                    data.modalidades.forEach(modalidad => {
-                        balanceContainer.innerHTML += createBalanceCard(modalidad);
-                    });
-                })
-                .catch(error => console.error('Error cargando los balances:', error));
+            const data = {
+                modalidades: [
+                    { nombre: "1.20 #1", balance: 2080000 },
+                    { nombre: "1.20 #2", balance: 3500000 },
+                    { nombre: "1.20 #3", balance: 1000000 },
+                ]
+            };
+            const balanceContainer = document.getElementById('balanceContainer');
+            data.modalidades.forEach(modalidad => {
+                balanceContainer.innerHTML += createBalanceCard(modalidad);
+            });
         }
 
         document.addEventListener('DOMContentLoaded', loadBalances);
