@@ -35,6 +35,12 @@
       "role": "Miembro",
       "image": "img/incognito.webp",
       "status": "pendiente"
+    },
+    {
+      "name": "Kord-Ko",
+      "role": "Miembro",
+      "image": "img/kordko.webp",
+      "status": "pendiente"
     }
   ]
 }

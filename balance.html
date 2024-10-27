@@ -50,13 +50,13 @@
         </div>
     </header>
 
-    <main class="container mx-auto px-4 py-12 flex-grow">
-        <section class="bg-gray-800 rounded-lg shadow-xl p-8 mb-12">
-            <h2 class="text-3xl font-bold text-onac-blue mb-4">Balance ONAC</h2>
-            <p class="text-gray-300 text-xl mb-6">Balance disponible para la organización</p>
-            <div id="balanceDisplay" class="text-6xl font-bold mb-4"></div>
-            <div id="balanceCategory" class="text-2xl font-semibold"></div>
-        </section>
+    <main class="flex-grow">
+        <div class="container mx-auto px-4 py-12">
+            <h1 class="text-4xl font-bold text-onac-blue mb-8">Balance ONAC</h1>
+            <div id="balanceContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Las tarjetas de balance se insertarán aquí dinámicamente -->
+            </div>
+        </div>
     </main>
 
     <footer class="bg-gray-800 text-gray-400 py-6 mt-auto">
@@ -67,50 +67,44 @@
     </footer>
 
     <script>
-        function updateBalance(balance) {
-            const balanceDisplay = document.getElementById('balanceDisplay');
-            const balanceCategory = document.getElementById('balanceCategory');
-
-            balanceDisplay.textContent = balance.toLocaleString('es-ES') + ' $';
-
-            let color, category;
-            if (balance <= 10000) {
-                color = 'text-red-600';
-                category = 'Balance Crítico';
-            } else if (balance <= 50000) {
-                color = 'text-orange-500';
-                category = 'Balance Muy Bajo';
-            } else if (balance <= 100000) {
-                color = 'text-yellow-500';
-                category = 'Balance Bajo';
-            } else if (balance <= 500000) {
-                color = 'text-yellow-300';
-                category = 'Balance Moderado Bajo';
-            } else if (balance <= 1000000) {
-                color = 'text-green-400';
-                category = 'Balance Moderado';
-            } else if (balance <= 5000000) {
-                color = 'text-green-500';
-                category = 'Balance Saludable';
-            } else if (balance <= 10000000) {
-                color = 'text-blue-400';
-                category = 'Balance Muy Saludable';
-            } else if (balance <= 50000000) {
-                color = 'text-blue-500';
-                category = 'Balance Excelente';
-            } else {
-                color = 'text-purple-500';
-                category = 'Balance Extraordinario';
-            }
-
-            balanceDisplay.className = `text-6xl font-bold mb-4 ${color}`;
-            balanceCategory.textContent = category;
-            balanceCategory.className = `text-2xl font-semibold ${color}`;
+        function getBalanceInfo(balance) {
+            if (balance <= 10000) return { color: 'text-red-600', category: 'Balance Crítico' };
+            if (balance <= 50000) return { color: 'text-orange-500', category: 'Balance Muy Bajo' };
+            if (balance <= 100000) return { color: 'text-yellow-500', category: 'Balance Bajo' };
+            if (balance <= 500000) return { color: 'text-yellow-300', category: 'Balance Moderado Bajo' };
+            if (balance <= 1000000) return { color: 'text-green-400', category: 'Balance Moderado' };
+            if (balance <= 5000000) return { color: 'text-green-500', category: 'Balance Saludable' };
+            if (balance <= 10000000) return { color: 'text-blue-400', category: 'Balance Muy Saludable' };
+            if (balance <= 50000000) return { color: 'text-blue-500', category: 'Balance Excelente' };
+            return { color: 'text-purple-500', category: 'Balance Extraordinario' };
         }
 
-        // Simular un balance (reemplazar con el balance real)
-        const currentBalance = 220000;
-        updateBalance(currentBalance);
+        function createBalanceCard(modalidad) {
+            const { color, category } = getBalanceInfo(modalidad.balance);
+            return `
+                <div class="bg-gray-800 border-gray-700 rounded-lg shadow-xl p-6">
+                    <h2 class="text-2xl font-bold text-onac-blue mb-4">${modalidad.nombre}</h2>
+                    <p class="text-4xl font-bold mb-2 ${color}">
+                        ${modalidad.balance.toLocaleString('es-ES')} $
+                    </p>
+                    <p class="text-lg font-semibold ${color}">${category}</p>
+                </div>
+            `;
+        }
+
+        function loadBalances() {
+            fetch('/data/modalidades.json')
+                .then(response => response.json())
+                .then(data => {
+                    const balanceContainer = document.getElementById('balanceContainer');
+                    data.modalidades.forEach(modalidad => {
+                        balanceContainer.innerHTML += createBalanceCard(modalidad);
+                    });
+                })
+                .catch(error => console.error('Error cargando los balances:', error));
+        }
+
+        document.addEventListener('DOMContentLoaded', loadBalances);
     </script>
 </body>
 
