@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Balance ONAC</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'onac-blue': '#4fc3f7',
+                        'onac-dark': '#1e293b',
+                    },
+                    fontFamily: {
+                        'onest': ['Onest', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Onest', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-onac-dark text-gray-100 font-onest leading-normal tracking-normal min-h-screen flex flex-col">
+    <header class="bg-gray-800 text-white py-6 sticky top-0 z-10 shadow-lg">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center">
+                <h1 class="text-3xl font-bold text-onac-blue">ONAC</h1>
+                <nav>
+                    <ul class="flex space-x-6">
+                        <li><a href="index.html"
+                                class="hover:text-onac-blue transition-colors duration-200 text-lg">Inicio</a></li>
+                        <li><a href="members.html"
+                                class="hover:text-onac-blue transition-colors duration-200 text-lg">Miembros</a></li>
+                        <li><a href="balance.html"
+                                class="text-onac-blue font-semibold transition-colors duration-200 text-lg">Balance</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-12 flex-grow">
+        <section class="bg-gray-800 rounded-lg shadow-xl p-8 mb-12">
+            <h2 class="text-3xl font-bold text-onac-blue mb-4">Balance ONAC</h2>
+            <p class="text-gray-300 text-xl mb-6">Balance disponible para la organización</p>
+            <div id="balanceDisplay" class="text-6xl font-bold mb-4"></div>
+            <div id="balanceCategory" class="text-2xl font-semibold"></div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-gray-400 py-6 mt-auto">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-sm">&copy; 2024 ONAC - Organización de NauticMC para la Ayuda y el Crecimiento. Todos los
+                derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        function updateBalance(balance) {
+            const balanceDisplay = document.getElementById('balanceDisplay');
+            const balanceCategory = document.getElementById('balanceCategory');
+
+            balanceDisplay.textContent = balance.toLocaleString('es-ES') + ' $';
+
+            let color, category;
+            if (balance <= 10000) {
+                color = 'text-red-600';
+                category = 'Balance Crítico';
+            } else if (balance <= 50000) {
+                color = 'text-orange-500';
+                category = 'Balance Muy Bajo';
+            } else if (balance <= 100000) {
+                color = 'text-yellow-500';
+                category = 'Balance Bajo';
+            } else if (balance <= 500000) {
+                color = 'text-yellow-300';
+                category = 'Balance Moderado Bajo';
+            } else if (balance <= 1000000) {
+                color = 'text-green-400';
+                category = 'Balance Moderado';
+            } else if (balance <= 5000000) {
+                color = 'text-green-500';
+                category = 'Balance Saludable';
+            } else if (balance <= 10000000) {
+                color = 'text-blue-400';
+                category = 'Balance Muy Saludable';
+            } else if (balance <= 50000000) {
+                color = 'text-blue-500';
+                category = 'Balance Excelente';
+            } else {
+                color = 'text-purple-500';
+                category = 'Balance Extraordinario';
+            }
+
+            balanceDisplay.className = `text-6xl font-bold mb-4 ${color}`;
+            balanceCategory.textContent = category;
+            balanceCategory.className = `text-2xl font-semibold ${color}`;
+        }
+
+        // Simular un balance (reemplazar con el balance real)
+        const currentBalance = 220000;
+        updateBalance(currentBalance);
+    </script>
+</body>
+
+</html>

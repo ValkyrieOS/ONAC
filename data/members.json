@@ -3,12 +3,38 @@
     {
       "name": "VKTEAM",
       "role": "Fundador",
-      "image": "img/vkteam.png"
+      "image": "img/vkteam.png",
+      "status": "activo"
     },
     {
       "name": "Real-Minty",
       "role": "Miembro",
-      "image": "img/realminty.webp"
+      "image": "img/realminty.webp",
+      "status": "pendiente"
+    },
+    {
+      "name": "KDS",
+      "role": "Miembro",
+      "image": "img/kds.webp",
+      "status": "pendiente"
+    },
+    {
+      "name": "Avengers",
+      "role": "Miembro",
+      "image": "img/avengers.webp",
+      "status": "pendiente"
+    },
+    {
+      "name": "NauticWarriors",
+      "role": "Miembro",
+      "image": "img/nauticwarriors.webp",
+      "status": "pendiente"
+    },
+    {
+      "name": "incognito",
+      "role": "Miembro",
+      "image": "img/incognito.webp",
+      "status": "pendiente"
     }
   ]
 }

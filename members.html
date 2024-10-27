@@ -1,36 +1,31 @@
 <!DOCTYPE html>
-<html lang="es" class="dark">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Miembros de ONAC - Organización de NauticMC para la Ayuda y el Crecimiento</title>
+    <title>Miembros - ONAC</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+    </style>
     <script>
         tailwind.config = {
-            darkMode: 'class',
             theme: {
                 extend: {
-                    colors: {
-                        'onac-blue': '#4fc3f7',
-                        'onac-dark': '#1e293b',
-                    },
                     fontFamily: {
-                        'onest': ['Onest', 'sans-serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'onac-blue': '#3B82F6',
                     },
                 }
             }
         }
     </script>
-    <style>
-        body {
-            font-family: 'Onest', sans-serif;
-        }
-    </style>
 </head>
 
-<body class="bg-onac-dark text-gray-100 font-onest leading-normal tracking-normal min-h-screen flex flex-col">
+<body class="bg-gray-900 text-white min-h-screen flex flex-col font-sans">
     <header class="bg-gray-800 text-white py-6 sticky top-0 z-10 shadow-lg">
         <div class="container mx-auto px-4">
             <div class="flex justify-between items-center">
@@ -40,7 +35,9 @@
                         <li><a href="index.html"
                                 class="hover:text-onac-blue transition-colors duration-200 text-lg">Inicio</a></li>
                         <li><a href="members.html"
-                                class="text-onac-blue font-semibold transition-colors duration-200 text-lg">Miembros</a>
+                                class="hover:text-onac-blue transition-colors duration-200 text-lg">Miembros</a></li>
+                        <li><a href="balance.html"
+                                class="hover:text-onac-blue font-semibold transition-colors duration-200 text-lg">Balance</a>
                         </li>
                     </ul>
                 </nav>
@@ -49,38 +46,168 @@
     </header>
 
     <main class="container mx-auto px-4 py-12 flex-grow">
-        <section class="bg-gray-800 rounded-lg shadow-xl p-8 mb-12">
-            <h2 class="text-3xl font-bold text-onac-blue mb-8">Miembros de ONAC</h2>
-            <div id="membersList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
-        </section>
+        <div class="mb-12 bg-gray-800 rounded-lg shadow-xl p-8 relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-green-500 via-yellow-500 to-red-500">
+            </div>
+            <h2 class="text-4xl font-bold text-onac-blue mb-6">Miembros de ONAC</h2>
+            <p class="text-xl text-gray-300 mb-4">Descubre nuestra comunidad de jugadores apasionados y comprometidos.
+            </p>
+            <div id="memberStats" class="grid grid-cols-3 gap-4 text-center">
+                <!-- Stats will be inserted here -->
+            </div>
+        </div>
+
+        <div id="membersContainer" class="space-y-12">
+            <!-- Member sections will be generated here -->
+        </div>
     </main>
 
-    <footer class="bg-gray-800 text-gray-400 py-6 mt-auto">
-        <div class="container mx-auto px-4 text-center">
-            <p class="text-sm">&copy; 2024 ONAC - Organización de NauticMC para la Ayuda y el Crecimiento. Todos los
-                derechos reservados.</p>
-        </div>
+    <footer class="bg-gray-800 text-center py-6">
+        <p class="text-sm text-gray-400">© 2024 ONAC - Organización de NauticMC para la Ayuda y el Crecimiento. Todos
+            los derechos reservados.</p>
     </footer>
 
     <script>
-        fetch('data/members.json')
-            .then(response => response.json())
-            .then(data => {
-                const membersList = document.getElementById('membersList');
-                data.members.forEach(member => {
-                    const div = document.createElement('div');
-                    div.className = 'bg-gray-700 rounded-lg p-6 flex items-center space-x-6 transform transition duration-300 hover:scale-105 hover:shadow-2xl';
-                    div.innerHTML = `
-                        <img src="${member.image}" alt="${member.name}" class="w-20 h-20 rounded-full object-cover border-4 border-onac-blue">
-                        <div>
-                            <h3 class="text-xl font-semibold text-onac-blue">${member.name}</h3>
-                            <p class="text-gray-300 mt-1">${member.role}</p>
-                        </div>
-                    `;
-                    membersList.appendChild(div);
+        class Member {
+            constructor(data) {
+                this.name = data.name;
+                this.role = data.role;
+                this.image = data.image;
+                this.status = data.status;
+                this.motivo = data.motivo;
+            }
+
+            createMemberCard() {
+                const statusColors = {
+                    'activo': 'bg-green-500',
+                    'pendiente': 'bg-yellow-500',
+                    'baneado': 'bg-red-500'
+                };
+
+                const roleColors = {
+                    'Fundador': 'text-yellow-400',
+                    'Miembro': 'text-onac-blue'
+                };
+
+                const card = document.createElement('div');
+                card.className = `bg-gray-800 rounded-lg overflow-hidden shadow-lg transition-all duration-300 hover:shadow-2xl hover:scale-105 flex flex-col h-full`;
+
+                card.innerHTML = `
+                    <div class="relative">
+                        <img src="${this.image}" alt="Avatar de ${this.name}" class="w-full h-48 object-cover">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-gray-900 to-transparent h-24"></div>
+                        <div class="absolute bottom-2 left-2 bg-gray-900 bg-opacity-75 px-2 py-1 rounded text-sm ${statusColors[this.status]}">${this.status.charAt(0).toUpperCase() + this.status.slice(1)}</div>
+                    </div>
+                    <div class="p-4 flex-grow">
+                        <h3 class="text-xl font-semibold mb-2">${this.name}</h3>
+                        <p class="text-sm font-medium ${roleColors[this.role]} mb-4">${this.role}</p>
+                        ${this.status === 'baneado' && this.motivo ? `
+                            <div class="mt-2 p-3 bg-red-900/50 rounded-lg text-sm">
+                                <p class="font-semibold text-red-400 mb-1">Motivo del ban:</p>
+                                <p class="text-gray-300">${this.motivo}</p>
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+
+                return card;
+            }
+        }
+
+        class MemberManager {
+            constructor() {
+                this.members = [];
+                this.statusTitles = {
+                    'activo': 'Miembros Activos',
+                    'pendiente': 'Miembros Pendientes',
+                    'baneado': 'Miembros Baneados'
+                };
+            }
+
+            async fetchMembers() {
+                try {
+                    const response = await fetch('./data/members.json');
+                    const data = await response.json();
+                    this.members = data.members.map(memberData => new Member(memberData));
+                    this.displayMembers();
+                    this.updateMemberStats();
+                } catch (error) {
+                    console.error('Error al cargar los miembros:', error);
+                    this.handleError();
+                }
+            }
+
+            displayMembers() {
+                const container = document.getElementById('membersContainer');
+                container.innerHTML = '';
+
+                Object.entries(this.statusTitles).forEach(([status, title]) => {
+                    const membersOfStatus = this.members.filter(member => member.status === status);
+
+                    if (membersOfStatus.length > 0) {
+                        const section = this.createSection(title, status, membersOfStatus);
+                        container.appendChild(section);
+                    }
                 });
-            })
-            .catch(error => console.error('Error:', error));
+            }
+
+            createSection(title, status, members) {
+                const section = document.createElement('section');
+                section.className = 'bg-gray-800 rounded-lg shadow-xl p-8 relative overflow-hidden';
+
+                const statusColors = {
+                    'activo': 'bg-green-500',
+                    'pendiente': 'bg-yellow-500',
+                    'baneado': 'bg-red-500'
+                };
+
+                section.innerHTML = `
+                    <div class="absolute top-0 left-0 w-full h-2 ${statusColors[status]}"></div>
+                    <h2 class="text-3xl font-bold text-onac-blue mb-8">${title}</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        ${members.map(member => member.createMemberCard().outerHTML).join('')}
+                    </div>
+                `;
+
+                return section;
+            }
+
+            updateMemberStats() {
+                const statsContainer = document.getElementById('memberStats');
+                const totalMembers = this.members.length;
+                const activeMembers = this.members.filter(m => m.status === 'activo').length;
+                const pendingMembers = this.members.filter(m => m.status === 'pendiente').length;
+
+                const stats = [
+                    { label: 'Total Miembros', value: totalMembers, color: 'bg-onac-blue' },
+                    { label: 'Miembros Activos', value: activeMembers, color: 'bg-green-500' },
+                    { label: 'Miembros Pendientes', value: pendingMembers, color: 'bg-yellow-500' }
+                ];
+
+                statsContainer.innerHTML = stats.map(stat => `
+                    <div class="bg-gray-700 p-6 rounded-lg relative overflow-hidden group">
+                        <div class="absolute inset-0 ${stat.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
+                        <p class="text-4xl font-bold mb-2">${stat.value}</p>
+                        <p class="text-sm text-gray-400">${stat.label}</p>
+                    </div>
+                `).join('');
+            }
+
+            handleError() {
+                const container = document.getElementById('membersContainer');
+                container.innerHTML = `
+                    <div class="text-center text-red-500 p-8 bg-red-100 rounded-lg">
+                        <p class="text-2xl font-bold mb-4">¡Ups! Algo salió mal</p>
+                        <p>No pudimos cargar la información de los miembros. Por favor, intenta de nuevo más tarde.</p>
+                    </div>
+                `;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const memberManager = new MemberManager();
+            memberManager.fetchMembers();
+        });
     </script>
 </body>
 
