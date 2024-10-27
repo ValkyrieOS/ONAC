@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Miembros de ONAC - Organización de NauticMC para la Ayuda y el Crecimiento</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'onac-blue': '#005f73',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-gray-900 text-gray-100 font-sans leading-normal tracking-normal">
+    <header class="bg-onac-blue text-white py-6">
+        <div class="container mx-auto px-4">
+            <h1 class="text-4xl font-bold text-center">ONAC</h1>
+            <p class="text-xl text-center mt-2">Organización de NauticMC para la Ayuda y el Crecimiento</p>
+        </div>
+    </header>
+
+    <nav class="bg-gray-800 text-white py-4">
+        <div class="container mx-auto px-4">
+            <ul class="flex justify-center space-x-6">
+                <li><a href="index.html" class="hover:text-onac-blue transition-colors duration-200">Inicio</a></li>
+                <li><a href="members.html" class="hover:text-onac-blue transition-colors duration-200">Miembros</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container mx-auto px-4 py-8">
+        <section class="bg-gray-800 shadow-md rounded-lg p-6 mb-8">
+            <h2 class="text-2xl font-bold text-onac-blue mb-4">Miembros de ONAC</h2>
+            <ul id="membersList" class="space-y-4"></ul>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white py-4">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2024 ONAC - Organización de NauticMC para la Ayuda y el Crecimiento. Todos los derechos
+                reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        fetch('data/members.json')
+            .then(response => response.json())
+            .then(data => {
+                const membersList = document.getElementById('membersList');
+                data.members.forEach(member => {
+                    const li = document.createElement('li');
+                    li.className = 'flex items-center space-x-4 bg-gray-700 p-4 rounded-lg';
+                    li.innerHTML = `
+                        <img src="${member.image}" alt="${member.name}" class="w-16 h-16 rounded-full object-cover">
+                        <div>
+                            <h3 class="text-xl font-semibold">${member.name}</h3>
+                            <p class="text-gray-300">${member.role}</p>
+                        </div>
+                    `;
+                    membersList.appendChild(li);
+                });
+            })
+            .catch(error => console.error('Error:', error));
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ONAC - Organización de NauticMC para la Ayuda y el Crecimiento</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'onac-blue': '#005f73',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-gray-900 text-gray-100 font-sans leading-normal tracking-normal">
+    <header class="bg-onac-blue text-white py-6">
+        <div class="container mx-auto px-4">
+            <h1 class="text-4xl font-bold text-center">ONAC</h1>
+            <p class="text-xl text-center mt-2">Organización de NauticMC para la Ayuda y el Crecimiento</p>
+        </div>
+    </header>
+
+    <nav class="bg-gray-800 text-white py-4">
+        <div class="container mx-auto px-4">
+            <ul class="flex justify-center space-x-6">
+                <li><a href="index.html" class="hover:text-onac-blue transition-colors duration-200">Inicio</a></li>
+                <li><a href="members.html" class="hover:text-onac-blue transition-colors duration-200">Miembros</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container mx-auto px-4 py-8">
+        <section class="bg-gray-800 shadow-md rounded-lg p-6 mb-8">
+            <h2 class="text-2xl font-bold text-onac-blue mb-4">Sobre ONAC</h2>
+            <p class="text-gray-300">ONAC es una organización que reúne a los clanes de NauticMC con el objetivo de
+                promover la igualdad de oportunidades y el crecimiento colectivo. Nuestra misión es proporcionar apoyo y
+                recursos a los clanes para ayudarles a desarrollarse y prosperar en el juego, independientemente de su
+                tamaño o experiencia.</p>
+        </section>
+
+        <section class="bg-gray-800 shadow-md rounded-lg p-6 mb-8">
+            <h2 class="text-2xl font-bold text-onac-blue mb-4">Nuestra Misión</h2>
+            <p class="text-gray-300 mb-4">A través de la colaboración y el intercambio de conocimientos, ONAC tiene como
+                objetivo crear un entorno más justo y próspero para todos los jugadores de NauticMC. Trabajamos para:
+            </p>
+            <ul class="list-disc list-inside text-gray-300">
+                <li>Promover la igualdad de oportunidades entre clanes</li>
+                <li>Facilitar el crecimiento colectivo de la comunidad NauticMC</li>
+                <li>Proporcionar recursos y apoyo a clanes de todos los tamaños</li>
+                <li>Fomentar la colaboración y el intercambio de conocimientos</li>
+            </ul>
+        </section>
+
+        <section class="bg-gray-800 shadow-md rounded-lg p-6">
+            <h2 class="text-2xl font-bold text-onac-blue mb-4">Nuestro Fundador</h2>
+            <div class="flex flex-col md:flex-row items-center">
+                <img src="img/vkteam.png"
+                    alt="VKTEAM - Fundador de ONAC" class="w-48 h-48 rounded-full object-cover mb-4 md:mb-0 md:mr-6">
+                <p class="text-gray-300">ONAC fue fundada por VKTEAM, un líder visionario en la comunidad de NauticMC.
+                    Su dedicación y pasión por crear una comunidad más unida y equitativa ha sido la fuerza impulsora
+                    detrás de ONAC.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white py-4">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2024 ONAC - Organización de NauticMC para la Ayuda y el Crecimiento. Todos los derechos
+                reservados.</p>
+        </div>
+    </footer>
+</body>
+
+</html>
