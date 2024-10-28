@@ -1,113 +1,265 @@
 <!DOCTYPE html>
 <html lang="es" class="dark">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Balance ONAC</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        'onac-blue': '#4fc3f7',
-                        'onac-dark': '#1e293b',
-                    },
-                    fontFamily: {
-                        'onest': ['Onest', 'sans-serif'],
-                    },
-                }
-            }
-        }
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "onac-blue": "#4fc3f7",
+              "onac-dark": "#1e293b",
+              "onac-light": "#e0f7fa",
+            },
+            fontFamily: {
+              onest: ["Onest", "sans-serif"],
+            },
+          },
+        },
+      };
     </script>
     <style>
-        body {
-            font-family: 'Onest', sans-serif;
-        }
+      body {
+        font-family: "Onest", sans-serif;
+      }
     </style>
-</head>
+  </head>
 
-<body class="bg-onac-dark text-gray-100 font-onest leading-normal tracking-normal min-h-screen flex flex-col">
-    <header class="bg-gray-800 text-white py-6 sticky top-0 z-10 shadow-lg">
-        <div class="container mx-auto px-4">
-            <div class="flex justify-between items-center">
-                <h1 class="text-3xl font-bold text-onac-blue">ONAC</h1>
-                <nav>
-                    <ul class="flex space-x-6">
-                        <li><a href="index.html"
-                                class="hover:text-onac-blue transition-colors duration-200 text-lg">Inicio</a></li>
-                        <li><a href="members.html"
-                                class="hover:text-onac-blue transition-colors duration-200 text-lg">Miembros</a></li>
-                        <li><a href="balance.html"
-                                class="text-onac-blue font-semibold transition-colors duration-200 text-lg">Balance</a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
+  <body
+    class="bg-onac-dark text-gray-100 font-onest leading-normal tracking-normal min-h-screen flex flex-col"
+  >
+    <header class="bg-gray-800 text-white py-4 sticky top-0 z-10 shadow-lg">
+      <div class="container mx-auto px-4">
+        <div class="flex justify-between items-center">
+          <h1 class="text-3xl font-bold text-onac-blue">ONAC</h1>
+          <nav>
+            <ul class="flex space-x-6">
+              <li>
+                <a
+                  href="index.html"
+                  class="hover:text-onac-blue transition-colors duration-200 text-lg"
+                  >Inicio</a
+                >
+              </li>
+              <li>
+                <a
+                  href="members.html"
+                  class="hover:text-onac-blue transition-colors duration-200 text-lg"
+                  >Miembros</a
+                >
+              </li>
+              <li>
+                <a
+                  href="balance.html"
+                  class="text-onac-blue font-semibold transition-colors duration-200 text-lg"
+                  >Balance</a
+                >
+              </li>
+            </ul>
+          </nav>
         </div>
+      </div>
     </header>
 
     <main class="flex-grow">
-        <div class="container mx-auto px-4 py-12">
-            <h1 class="text-4xl font-bold text-onac-blue mb-8">Balance ONAC</h1>
-            <div id="balanceContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Las tarjetas de balance se insertarán aquí dinámicamente -->
+      <div class="container mx-auto px-4 py-8">
+        <h1 class="text-4xl font-bold text-onac-blue mb-8">Balance ONAC</h1>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div class="lg:col-span-2">
+            <div
+              id="balanceContainer"
+              class="grid grid-cols-1 md:grid-cols-2 gap-6"
+            >
+              <!-- Las tarjetas de balance se insertarán aquí dinámicamente -->
             </div>
+          </div>
+          <div class="bg-gray-800 rounded-lg shadow-xl p-6">
+            <h2 class="text-2xl font-bold text-onac-blue mb-4">
+              Distribución de Balance
+            </h2>
+            <canvas id="balanceChart"></canvas>
+          </div>
         </div>
+      </div>
     </main>
 
     <footer class="bg-gray-800 text-gray-400 py-6 mt-auto">
-        <div class="container mx-auto px-4 text-center">
-            <p class="text-sm">&copy; 2024 ONAC - Organización de NauticMC para la Ayuda y el Crecimiento. Todos los
-                derechos reservados.</p>
-        </div>
+      <div class="container mx-auto px-4 text-center">
+        <p class="text-sm">
+          &copy; 2024 ONAC - Organización de NauticMC para la Ayuda y el
+          Crecimiento. Todos los derechos reservados.
+        </p>
+      </div>
     </footer>
 
     <script>
-        function getBalanceInfo(balance) {
-            if (balance <= 10000) return { color: 'text-red-600', category: 'Balance Crítico' };
-            if (balance <= 50000) return { color: 'text-orange-500', category: 'Balance Muy Bajo' };
-            if (balance <= 100000) return { color: 'text-yellow-500', category: 'Balance Bajo' };
-            if (balance <= 500000) return { color: 'text-yellow-300', category: 'Balance Moderado Bajo' };
-            if (balance <= 1000000) return { color: 'text-green-400', category: 'Balance Moderado' };
-            if (balance <= 5000000) return { color: 'text-green-500', category: 'Balance Saludable' };
-            if (balance <= 10000000) return { color: 'text-blue-400', category: 'Balance Muy Saludable' };
-            if (balance <= 50000000) return { color: 'text-blue-500', category: 'Balance Excelente' };
-            return { color: 'text-purple-500', category: 'Balance Extraordinario' };
-        }
+      function getBalanceInfo(balance) {
+        if (balance <= 10000)
+          return {
+            color: "text-red-600",
+            category: "Balance Crítico",
+            bgColor: "bg-red-900",
+          };
+        if (balance <= 50000)
+          return {
+            color: "text-orange-500",
+            category: "Balance Muy Bajo",
+            bgColor: "bg-orange-900",
+          };
+        if (balance <= 100000)
+          return {
+            color: "text-yellow-500",
+            category: "Balance Bajo",
+            bgColor: "bg-yellow-900",
+          };
+        if (balance <= 500000)
+          return {
+            color: "text-yellow-300",
+            category: "Balance Moderado Bajo",
+            bgColor: "bg-yellow-800",
+          };
+        if (balance <= 1000000)
+          return {
+            color: "text-green-400",
+            category: "Balance Moderado",
+            bgColor: "bg-green-800",
+          };
+        if (balance <= 5000000)
+          return {
+            color: "text-green-500",
+            category: "Balance Saludable",
+            bgColor: "bg-green-900",
+          };
+        if (balance <= 10000000)
+          return {
+            color: "text-blue-400",
+            category: "Balance Muy Saludable",
+            bgColor: "bg-blue-900",
+          };
+        if (balance <= 50000000)
+          return {
+            color: "text-blue-500",
+            category: "Balance Excelente",
+            bgColor: "bg-blue-800",
+          };
+        return {
+          color: "text-purple-500",
+          category: "Balance Extraordinario",
+          bgColor: "bg-purple-900",
+        };
+      }
 
-        function createBalanceCard(modalidad) {
-            const { color, category } = getBalanceInfo(modalidad.balance);
-            return `
-                <div class="bg-gray-800 border-gray-700 rounded-lg shadow-xl p-6">
-                    <h2 class="text-2xl font-bold text-onac-blue mb-4">${modalidad.nombre}</h2>
-                    <p class="text-4xl font-bold mb-2 ${color}">
-                        ${modalidad.balance.toLocaleString('es-ES')} $
-                    </p>
-                    <p class="text-lg font-semibold ${color}">${category}</p>
+      function createBalanceCard(modalidad) {
+        const { color, category, bgColor } = getBalanceInfo(modalidad.balance);
+        let alertasHtml = "";
+        if (modalidad.alertas && modalidad.alertas.length > 0) {
+          alertasHtml = `
+                    <div class="mt-4">
+                        <h3 class="text-lg font-semibold text-red-500 mb-2 flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                            </svg>
+                            Alertas:
+                        </h3>
+                        <ul class="list-disc list-inside">
+                            ${modalidad.alertas
+                              .map(
+                                (alerta) =>
+                                  `<li class="text-red-400">${alerta}</li>`
+                              )
+                              .join("")}
+                        </ul>
+                    </div>
+                `;
+        }
+        return `
+                <div class="bg-gray-800 border-gray-700 rounded-lg shadow-xl p-6 transition-all duration-300 hover:shadow-2xl hover:scale-105">
+                    <h2 class="text-2xl font-bold text-onac-blue mb-4">${
+                      modalidad.nombre
+                    }</h2>
+                    <div class="flex items-center justify-between mb-4">
+                        <p class="text-3xl font-bold ${color}">
+                            ${modalidad.balance.toLocaleString("es-ES")} $
+                        </p>
+                        <span class="px-3 py-1 text-sm font-semibold rounded-full ${bgColor} ${color}">
+                            ${category}
+                        </span>
+                    </div>
+                    ${alertasHtml}
                 </div>
             `;
-        }
+      }
 
-        function loadBalances() {
-            const data = {
-                modalidades: [
-                    { nombre: "1.20 #1", balance: 2080000 },
-                    { nombre: "1.20 #2", balance: 3500000 },
-                    { nombre: "1.20 #3", balance: 469000 },
-                ]
-            };
-            const balanceContainer = document.getElementById('balanceContainer');
-            data.modalidades.forEach(modalidad => {
-                balanceContainer.innerHTML += createBalanceCard(modalidad);
-            });
-        }
+      function createBalanceChart(modalidades) {
+        const ctx = document.getElementById("balanceChart").getContext("2d");
+        new Chart(ctx, {
+          type: "doughnut",
+          data: {
+            labels: modalidades.map((m) => m.nombre),
+            datasets: [
+              {
+                data: modalidades.map((m) => m.balance),
+                backgroundColor: [
+                  "#4fc3f7",
+                  "#ff9800",
+                  "#4caf50",
+                  "#f44336",
+                  "#9c27b0",
+                ],
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            plugins: {
+              legend: {
+                position: "bottom",
+              },
+              title: {
+                display: true,
+                text: "Distribución de Balance por Modalidad",
+              },
+            },
+          },
+        });
+      }
 
-        document.addEventListener('DOMContentLoaded', loadBalances);
+      function loadBalances() {
+        const data = {
+          modalidades: [
+            {
+              nombre: "1.20 #1",
+              balance: 2080000,
+            },
+            {
+              nombre: "1.20 #2",
+              balance: 3500000,
+              alertas: ["Valkyrie a recivido una estafa y reclamara el valor de lo perdido (2.8M)"]
+            },
+            {
+              nombre: "1.20 #3",
+              balance: 469000,
+              alertas: ["Balance bajo", "Revisar gastos"],
+            },
+          ],
+        };
+        const balanceContainer = document.getElementById("balanceContainer");
+        data.modalidades.forEach((modalidad) => {
+          balanceContainer.innerHTML += createBalanceCard(modalidad);
+        });
+        createBalanceChart(data.modalidades);
+      }
+
+      document.addEventListener("DOMContentLoaded", loadBalances);
     </script>
-</body>
-
+  </body>
 </html>
