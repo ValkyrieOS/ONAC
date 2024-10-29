@@ -41,6 +41,18 @@
       "role": "Miembro",
       "image": "img/kordko.webp",
       "status": "pendiente"
+    },
+    {
+      "name": "NightZ",
+      "role": "Miembro",
+      "image": "img/nightz.webp",
+      "status": "pendiente"
+    },
+    {
+      "name": "Veleta",
+      "role": "Miembro",
+      "image": "img/veleta.webp",
+      "status": "pendiente"
     }
   ]
 }
