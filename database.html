@@ -4,15 +4,20 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ONAC Database</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      rel="stylesheet"
+    />
     <style>
       /* Estilos generales */
       body {
         display: flex;
         justify-content: center;
-        align-items: flex-start;
-        background-color: #121212;
-        color: #fff;
-        font-family: Arial, sans-serif;
+        align-items: center;
+        background-color: #0c1a30;
+        /* Color de fondo oscuro */
+        color: #e0e0e0;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
         height: 100vh;
         margin: 0;
         padding: 20px;
@@ -22,62 +27,94 @@
       .container {
         display: flex;
         width: 100%;
-        max-width: 1000px;
-        background-color: #1e1e1e;
-        border-radius: 8px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        max-width: 1200px;
+        background-color: #1e2a4d;
+        /* Fondo del contenedor */
+        border-radius: 10px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        overflow: hidden;
       }
 
       /* Barra lateral */
       #sidebar {
-        width: 25%;
-        background-color: #2a2a2a;
+        width: 30%;
+        background-color: #243b58;
+        /* Fondo de la barra lateral */
         padding: 20px;
-        border-radius: 8px 0 0 8px;
+        color: #ffffff;
+        position: relative;
+        border-right: 2px solid #1f92f4;
+        /* Borde derecho */
       }
 
       /* Título del contenedor */
       #sidebar h2 {
-        color: #bb86fc;
-        font-size: 1.5em;
+        font-size: 1.8em;
         margin-bottom: 20px;
         text-align: center;
+        color: #1f92f4;
+        /* Color del título */
+      }
+
+      /* Campo de búsqueda */
+      #search {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border-radius: 5px;
+        border: 1px solid #bbb;
+        background-color: #334f7e;
+        /* Fondo del campo de búsqueda */
+        color: #e0e0e0;
       }
 
       /* Lista de enlaces */
+      #links {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+
       #links a {
-        color: #bb86fc;
+        color: #ffffff;
         text-decoration: none;
-        background-color: #333;
+        background-color: #1f92f4;
+        /* Color de fondo del enlace */
         border-radius: 8px;
-        padding: 12px;
-        margin-bottom: 10px;
+        padding: 15px;
+        transition: background 0.3s, transform 0.3s;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
         display: flex;
         align-items: center;
-        gap: 8px;
-        transition: background 0.3s;
+      }
+
+      #links a i {
+        margin-right: 10px;
+        /* Espacio entre el icono y el texto */
       }
 
       #links a:hover {
-        background-color: #444;
+        background-color: #1a7bb6;
+        /* Color al pasar el ratón */
+        transform: translateY(-2px);
       }
 
-      /* Ícono SVG */
-      #links a::before {
-        content: "";
-        display: inline-block;
-        width: 20px;
-        height: 20px;
-        mask: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="white" d="M20 6c0-2.168-3.663-4-8-4S4 3.832 4 6v2c0 2.168 3.663 4 8 4s8-1.832 8-4V6zm-8 13c-4.337 0-8-1.832-8-4v3c0 2.168 3.663 4 8 4s8-1.832 8-4v-3c0 2.168-3.663 4-8 4z"></path><path fill="white" d="M20 10c0 2.168-3.663 4-8 4s-8-1.832-8-4v3c0 2.168 3.663 4 8 4s8-1.832 8-4v-3z"></path></svg>');
-        background-color: #bb86fc;
+      /* Contador de archivos */
+      #fileCount {
+        color: #1f92f4;
+        /* Color del contador */
+        margin-bottom: 15px;
+        text-align: center;
+        font-weight: bold;
       }
 
       /* Área de visualización de Markdown */
       .markdown-view {
-        width: 75%;
-        background-color: #222;
+        width: 70%;
+        background-color: #22365b;
+        /* Fondo del área de visualización */
         padding: 30px;
-        border-radius: 0 8px 8px 0;
+        border-radius: 0 10px 10px 0;
         overflow-y: auto;
         max-height: 70vh;
         font-size: 16px;
@@ -88,12 +125,16 @@
       .markdown-view h1,
       .markdown-view h2,
       .markdown-view h3 {
-        color: #bb86fc;
+        color: #1f92f4;
+        /* Color de los títulos */
         margin-top: 0.8em;
+        border-bottom: 1px solid #334f7e;
+        /* Línea inferior */
+        padding-bottom: 5px;
       }
 
       .markdown-view h1 {
-        font-size: 1.8em;
+        font-size: 2em;
       }
 
       .markdown-view h2 {
@@ -108,40 +149,80 @@
       .markdown-view p,
       .markdown-view ul li {
         color: #e0e0e0;
+        margin-bottom: 10px;
       }
 
       .markdown-view a {
-        color: #bb86fc;
+        color: #1f92f4;
+        /* Color de los enlaces */
         text-decoration: underline;
         transition: color 0.2s;
       }
 
       .markdown-view a:hover {
-        color: #d2a3ff;
+        color: #a1c4e0;
+        /* Color al pasar el ratón */
       }
 
       .markdown-view blockquote {
-        color: #ddd;
-        border-left: 4px solid #bb86fc;
+        color: #bbb;
+        border-left: 4px solid #1f92f4;
+        /* Borde del bloque */
         padding-left: 10px;
         margin: 10px 0;
         font-style: italic;
+        background-color: #1e2a4d;
+        /* Fondo del bloque */
+        padding: 15px;
+        border-radius: 4px;
+      }
+
+      /* Efecto de scroll en la vista de Markdown */
+      .markdown-view::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      .markdown-view::-webkit-scrollbar-thumb {
+        background-color: #1f92f4;
+        /* Color del scroll */
+        border-radius: 4px;
+      }
+
+      /* Transición suave */
+      * {
+        transition: all 0.3s ease;
       }
     </style>
   </head>
+
   <body>
     <div class="container">
       <!-- Barra lateral -->
       <div id="sidebar">
         <h2>ONAC Database</h2>
+        <input
+          type="text"
+          id="search"
+          placeholder="Buscar archivos..."
+          oninput="filterLinks()"
+        />
+        <div id="fileCount">
+          Total de archivos: <span id="totalCount">3</span>
+        </div>
         <div id="links">
           <a
             href="#"
             onclick="loadMarkdown(event, 'database/contrato-publico.md')"
-            >Contrato Público</a
+            ><i class="fas fa-file-contract"></i>Contrato Público</a
           >
-          <a href="#" onclick="loadMarkdown(event, 'database/clanes-grandes.md')">Page 2</a>
-          <!-- Más enlaces según sea necesario -->
+          <a
+            href="#"
+            onclick="loadMarkdown(event, 'database/clanes-grandes.md')"
+            ><i class="fas fa-users"></i>Clanes Grandes</a
+          >
+          <a href="#" onclick="loadMarkdown(event, 'database/usuarios.md')"
+            ><i class="fas fa-user"></i>Derechos Miembros</a
+          >
         </div>
       </div>
 
@@ -178,8 +259,30 @@
             /\[(.*?)\]\((.*?)\)/gim,
             "<a href='$2' target='_blank'>$1</a>"
           )
-          .replace(/^\s*[-+*]\s+(.*)/gim, "<ul><li>$1</li></ul>")
-          .replace(/\n$/gim, "<br>");
+          .replace(/^- (.*$)/gim, "<ul><li>$1</li></ul>")
+          .replace(/<\/ul>\s*<ul>/gim, "")
+          .replace(/\n/g, "<br>");
+      }
+
+      // Función para filtrar los enlaces
+      function filterLinks() {
+        const searchValue = document
+          .getElementById("search")
+          .value.toLowerCase();
+        const links = document.querySelectorAll("#links a");
+        let count = 0;
+
+        links.forEach((link) => {
+          if (link.textContent.toLowerCase().includes(searchValue)) {
+            link.style.display = "flex"; // Muestra el enlace
+            count++;
+          } else {
+            link.style.display = "none"; // Oculta el enlace
+          }
+        });
+
+        // Actualiza el contador de archivos
+        document.getElementById("totalCount").textContent = count;
       }
     </script>
   </body>
