@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ONAC Database</title>
+    <style>
+      /* Estilos generales */
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        background-color: #121212;
+        color: #fff;
+        font-family: Arial, sans-serif;
+        height: 100vh;
+        margin: 0;
+        padding: 20px;
+      }
+
+      /* Contenedor principal */
+      .container {
+        display: flex;
+        width: 100%;
+        max-width: 1000px;
+        background-color: #1e1e1e;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+      }
+
+      /* Barra lateral */
+      #sidebar {
+        width: 25%;
+        background-color: #2a2a2a;
+        padding: 20px;
+        border-radius: 8px 0 0 8px;
+      }
+
+      /* Título del contenedor */
+      #sidebar h2 {
+        color: #bb86fc;
+        font-size: 1.5em;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+
+      /* Lista de enlaces */
+      #links a {
+        color: #bb86fc;
+        text-decoration: none;
+        background-color: #333;
+        border-radius: 8px;
+        padding: 12px;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        transition: background 0.3s;
+      }
+
+      #links a:hover {
+        background-color: #444;
+      }
+
+      /* Ícono SVG */
+      #links a::before {
+        content: "";
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        mask: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="white" d="M20 6c0-2.168-3.663-4-8-4S4 3.832 4 6v2c0 2.168 3.663 4 8 4s8-1.832 8-4V6zm-8 13c-4.337 0-8-1.832-8-4v3c0 2.168 3.663 4 8 4s8-1.832 8-4v-3c0 2.168-3.663 4-8 4z"></path><path fill="white" d="M20 10c0 2.168-3.663 4-8 4s-8-1.832-8-4v3c0 2.168 3.663 4 8 4s8-1.832 8-4v-3z"></path></svg>');
+        background-color: #bb86fc;
+      }
+
+      /* Área de visualización de Markdown */
+      .markdown-view {
+        width: 75%;
+        background-color: #222;
+        padding: 30px;
+        border-radius: 0 8px 8px 0;
+        overflow-y: auto;
+        max-height: 70vh;
+        font-size: 16px;
+        line-height: 1.6;
+      }
+
+      /* Títulos de Markdown */
+      .markdown-view h1,
+      .markdown-view h2,
+      .markdown-view h3 {
+        color: #bb86fc;
+        margin-top: 0.8em;
+      }
+
+      .markdown-view h1 {
+        font-size: 1.8em;
+      }
+
+      .markdown-view h2 {
+        font-size: 1.5em;
+      }
+
+      .markdown-view h3 {
+        font-size: 1.2em;
+      }
+
+      /* Otros elementos */
+      .markdown-view p,
+      .markdown-view ul li {
+        color: #e0e0e0;
+      }
+
+      .markdown-view a {
+        color: #bb86fc;
+        text-decoration: underline;
+        transition: color 0.2s;
+      }
+
+      .markdown-view a:hover {
+        color: #d2a3ff;
+      }
+
+      .markdown-view blockquote {
+        color: #ddd;
+        border-left: 4px solid #bb86fc;
+        padding-left: 10px;
+        margin: 10px 0;
+        font-style: italic;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Barra lateral -->
+      <div id="sidebar">
+        <h2>ONAC Database</h2>
+        <div id="links">
+          <a
+            href="#"
+            onclick="loadMarkdown(event, 'database/contrato-publico.md')"
+            >Contrato Público</a
+          >
+          <a href="#" onclick="loadMarkdown(event, 'database/clanes-grandes.md')">Page 2</a>
+          <!-- Más enlaces según sea necesario -->
+        </div>
+      </div>
+
+      <!-- Vista de Markdown -->
+      <div id="markdownView" class="markdown-view" style="display: none"></div>
+    </div>
+
+    <script>
+      // Función para cargar y mostrar Markdown
+      function loadMarkdown(event, file) {
+        event.preventDefault();
+        fetch(file)
+          .then((response) => response.text())
+          .then((data) => {
+            document.getElementById("markdownView").innerHTML =
+              markdownToHTML(data);
+            document.getElementById("markdownView").style.display = "block";
+          })
+          .catch((error) =>
+            console.error("Error al cargar el archivo .md:", error)
+          );
+      }
+
+      // Conversión mejorada de Markdown a HTML
+      function markdownToHTML(markdown) {
+        return markdown
+          .replace(/^### (.*$)/gim, "<h3>$1</h3>")
+          .replace(/^## (.*$)/gim, "<h2>$1</h2>")
+          .replace(/^# (.*$)/gim, "<h1>$1</h1>")
+          .replace(/^\> (.*$)/gim, "<blockquote>$1</blockquote>")
+          .replace(/\*\*(.*?)\*\*/gim, "<b>$1</b>")
+          .replace(/\*(.*?)\*/gim, "<i>$1</i>")
+          .replace(
+            /\[(.*?)\]\((.*?)\)/gim,
+            "<a href='$2' target='_blank'>$1</a>"
+          )
+          .replace(/^\s*[-+*]\s+(.*)/gim, "<ul><li>$1</li></ul>")
+          .replace(/\n$/gim, "<br>");
+      }
+    </script>
+  </body>
+</html>

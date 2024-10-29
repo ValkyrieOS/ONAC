@@ -1,90 +1,145 @@
 <!DOCTYPE html>
 <html lang="es" class="dark">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ONAC - Organización de NauticMC para la Ayuda y el Crecimiento</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      ONAC - Organización de NauticMC para la Ayuda y el Crecimiento
+    </title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
     <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        'onac-blue': '#4fc3f7',
-                        'onac-dark': '#1e293b',
-                    },
-                    fontFamily: {
-                        'onest': ['Onest', 'sans-serif'],
-                    },
-                }
-            }
-        }
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "onac-blue": "#4fc3f7",
+              "onac-dark": "#1e293b",
+            },
+            fontFamily: {
+              onest: ["Onest", "sans-serif"],
+            },
+          },
+        },
+      };
     </script>
     <style>
-        body {
-            font-family: 'Onest', sans-serif;
-        }
+      body {
+        font-family: "Onest", sans-serif;
+      }
     </style>
-</head>
+  </head>
 
-<body class="bg-onac-dark text-gray-100 font-onest leading-normal tracking-normal min-h-screen flex flex-col">
+  <body
+    class="bg-onac-dark text-gray-100 font-onest leading-normal tracking-normal min-h-screen flex flex-col"
+  >
     <header class="bg-gray-800 text-white py-6 sticky top-0 z-10 shadow-lg">
-        <div class="container mx-auto px-4">
-            <div class="flex justify-between items-center">
-                <h1 class="text-3xl font-bold text-onac-blue">ONAC</h1>
-                <nav>
-                    <ul class="flex space-x-6">
-                        <li><a href="index.html"
-                                class="hover:text-onac-blue transition-colors duration-200 text-lg">Inicio</a></li>
-                        <li><a href="members.html"
-                                class="hover:text-onac-blue transition-colors duration-200 text-lg">Miembros</a></li>
-                        <li><a href="balance.html"
-                                class="hover:text-onac-blue font-semibold transition-colors duration-200 text-lg">Balance</a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
+      <div class="container mx-auto px-4">
+        <div class="flex justify-between items-center">
+          <h1 class="text-3xl font-bold text-onac-blue">ONAC</h1>
+          <nav>
+            <ul class="flex space-x-6">
+              <li>
+                <a
+                  href="index.html"
+                  class="hover:text-onac-blue transition-colors duration-200 text-lg"
+                  >Inicio</a
+                >
+              </li>
+              <li>
+                <a
+                  href="members.html"
+                  class="hover:text-onac-blue transition-colors duration-200 text-lg"
+                  >Miembros</a
+                >
+              </li>
+              <li>
+                <a
+                  href="balance.html"
+                  class="hover:text-onac-blue font-semibold transition-colors duration-200 text-lg"
+                  >Balance</a
+                >
+              </li>
+            </ul>
+          </nav>
         </div>
+      </div>
     </header>
 
     <main class="container mx-auto px-4 py-12 flex-grow">
-        <section class="bg-gray-800 rounded-lg shadow-xl p-8 mb-12">
-            <h2 class="text-3xl font-bold text-onac-blue mb-4">Bienvenidos a ONAC</h2>
-            <p class="text-gray-300 text-xl">Organización de NauticMC para la Ayuda y el Crecimiento</p>
-        </section>
+      <section class="bg-gray-800 rounded-lg shadow-xl p-8 mb-12">
+        <h2 class="text-3xl font-bold text-onac-blue mb-4">
+          Bienvenidos a ONAC
+        </h2>
+        <p class="text-gray-300 text-xl">
+          Organización de NauticMC para la Ayuda y el Crecimiento
+        </p>
+      </section>
 
-        <section class="bg-gray-800 rounded-lg shadow-xl p-8 mb-12">
-            <h2 class="text-3xl font-bold text-onac-blue mb-6">Sobre Nosotros</h2>
-            <p class="text-gray-300 mb-6 text-lg">ONAC es una organización dedicada a promover la igualdad y el crecimiento colectivo entre los clanes de NauticMC. Nuestra misión es proporcionar apoyo y recursos para ayudar a todos los clanes a desarrollarse y prosperar.</p>
-            <ul class="list-disc list-inside text-gray-300 text-lg space-y-2">
-                <li>Promovemos la igualdad de oportunidades</li>
-                <li>Facilitamos el crecimiento colectivo</li>
-                <li>Proporcionamos recursos y apoyo</li>
-                <li>Fomentamos la colaboración</li>
-            </ul>
-        </section>
+      <section class="bg-gray-800 rounded-lg shadow-xl p-8 mb-12">
+        <h2 class="text-3xl font-bold text-onac-blue mb-6">Sobre Nosotros</h2>
+        <p class="text-gray-300 mb-6 text-lg">
+          ONAC es una organización dedicada a promover la igualdad y el
+          crecimiento colectivo entre los clanes de NauticMC. Nuestra misión es
+          proporcionar apoyo y recursos para ayudar a todos los clanes a
+          desarrollarse y prosperar.
+        </p>
+        <ul class="list-disc list-inside text-gray-300 text-lg space-y-2">
+          <li>Promovemos la igualdad de oportunidades</li>
+          <li>Facilitamos el crecimiento colectivo</li>
+          <li>Proporcionamos recursos y apoyo</li>
+          <li>Fomentamos la colaboración</li>
+        </ul>
+      </section>
 
-        <section class="bg-gray-800 rounded-lg shadow-xl p-8">
-            <h2 class="text-3xl font-bold text-onac-blue mb-6">Nuestro Fundador</h2>
-            <div class="flex items-center mb-6">
-                <img src="img/vkteam.png" alt="VKTEAM - Fundador de ONAC" class="w-24 h-24 rounded-full mr-6 border-4 border-onac-blue">
-                <div>
-                    <h3 class="text-2xl font-semibold text-onac-blue">VKTEAM</h3>
-                    <p class="text-gray-400 text-lg">Fundador de ONAC</p>
-                </div>
-            </div>
-            <p class="text-gray-300 text-lg">ONAC fue fundada por VKTEAM, un líder visionario en la comunidad de NauticMC. Su dedicación y pasión por crear una comunidad más unida y equitativa ha sido la fuerza impulsora detrás de ONAC.</p>
-        </section>
+      <section class="bg-gray-800 rounded-lg shadow-xl p-8 mb-12">
+        <h2 class="text-3xl font-bold text-onac-blue mb-6">
+          Accede a nuestra database pública
+        </h2>
+        <p class="text-gray-300 text-lg">
+          Puedes explorar y consultar nuestra base de datos pública para conocer
+          más sobre nuestros proyectos y actividades.
+        </p>
+        <a
+          href="database.html"
+          class="text-onac-blue font-semibold hover:underline mt-4 block"
+        >
+          Ir a la database pública
+        </a>
+      </section>
+
+      <section class="bg-gray-800 rounded-lg shadow-xl p-8">
+        <h2 class="text-3xl font-bold text-onac-blue mb-6">Nuestro Fundador</h2>
+        <div class="flex items-center mb-6">
+          <img
+            src="img/vkteam.png"
+            alt="VKTEAM - Fundador de ONAC"
+            class="w-24 h-24 rounded-full mr-6 border-4 border-onac-blue"
+          />
+          <div>
+            <h3 class="text-2xl font-semibold text-onac-blue">VKTEAM</h3>
+            <p class="text-gray-400 text-lg">Fundador de ONAC</p>
+          </div>
+        </div>
+        <p class="text-gray-300 text-lg">
+          ONAC fue fundada por VKTEAM, un líder visionario en la comunidad de
+          NauticMC. Su dedicación y pasión por crear una comunidad más unida y
+          equitativa ha sido la fuerza impulsora detrás de ONAC.
+        </p>
+      </section>
     </main>
 
     <footer class="bg-gray-800 text-gray-400 py-6 mt-auto">
-        <div class="container mx-auto px-4 text-center">
-            <p class="text-sm">&copy; 2024 ONAC - Organización de NauticMC para la Ayuda y el Crecimiento. Todos los derechos reservados.</p>
-        </div>
+      <div class="container mx-auto px-4 text-center">
+        <p class="text-sm">
+          &copy; 2024 ONAC - Organización de NauticMC para la Ayuda y el
+          Crecimiento. Todos los derechos reservados.
+        </p>
+      </div>
     </footer>
-</body>
-
+  </body>
 </html>
