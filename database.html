@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lista de Archivos MD</title>
+    <title>Lista de Archivos HTML</title>
     <style>
       body {
         font-family: Arial, sans-serif;
@@ -70,55 +70,55 @@
   </head>
   <body>
     <div class="container">
-      <h1>Lista de Archivos MD</h1>
+      <h1>Lista de Archivos HTML</h1>
       <input type="text" id="search" placeholder="Buscar archivos..." />
       <ul id="file-list">
-        <!-- La lista de archivos se generará dinámicamente aquí -->
+        <li>
+          <a href="database/contrato-publico.html" target="_blank"
+            >Contrato Público</a
+          >
+        </li>
+        <li>
+          <a href="database/clanes-grandes.html" target="_blank"
+            >Clanes Grandes</a
+          >
+        </li>
+        <li><a href="database/usuarios.html" target="_blank">Usuarios</a></li>
       </ul>
     </div>
 
     <script>
-      // Lista de archivos MD (esto debería generarse dinámicamente en un entorno de servidor real)
-      const files = ["contrato-publico.md", "clanes-grandes.md", "usuarios.md"];
-
-      const fileList = document.getElementById("file-list");
       const searchInput = document.getElementById("search");
-
-      function createFileList(files) {
-        fileList.innerHTML = "";
-        if (files.length === 0) {
-          fileList.innerHTML =
-            '<li class="no-results">No se encontraron archivos</li>';
-          return;
-        }
-        files.forEach((file) => {
-          const li = document.createElement("li");
-          const a = document.createElement("a");
-          a.href = `database/${file}`;
-          a.textContent = file.replace(".md", "").replace(/-/g, " ");
-          a.target = "_blank"; // Abre el archivo en una nueva pestaña
-          li.appendChild(a);
-          fileList.appendChild(li);
-        });
-      }
-
-      function filterFiles(query) {
-        return files.filter((file) =>
-          file
-            .toLowerCase()
-            .replace(".md", "")
-            .replace(/-/g, " ")
-            .includes(query.toLowerCase())
-        );
-      }
+      const fileList = document.getElementById("file-list");
+      const files = Array.from(fileList.getElementsByTagName("li"));
 
       searchInput.addEventListener("input", (e) => {
-        const filteredFiles = filterFiles(e.target.value);
-        createFileList(filteredFiles);
-      });
+        const query = e.target.value.toLowerCase();
 
-      // Inicializar la lista de archivos
-      createFileList(files);
+        let hasResults = false;
+        files.forEach((file) => {
+          const text = file.textContent.toLowerCase();
+          if (text.includes(query)) {
+            file.style.display = "";
+            hasResults = true;
+          } else {
+            file.style.display = "none";
+          }
+        });
+
+        // Muestra un mensaje si no hay resultados
+        if (!hasResults) {
+          if (!document.querySelector(".no-results")) {
+            const noResults = document.createElement("li");
+            noResults.className = "no-results";
+            noResults.textContent = "No se encontraron archivos";
+            fileList.appendChild(noResults);
+          }
+        } else {
+          const noResults = document.querySelector(".no-results");
+          if (noResults) noResults.remove();
+        }
+      });
     </script>
   </body>
 </html>
