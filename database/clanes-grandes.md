@@ -1,3 +1,8 @@
+---
+version: 1.0
+updated: 2024-10-29
+---
+
 # CLASIFICACIÓN Y COMPROMISO DE LOS CLANES GRANDES
 
 ## REÁMBULO

@@ -1,289 +1,405 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="h-full">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ONAC Database</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      href="https://cdn.jsdelivr.net/npm/lucide-static@0.321.0/font/lucide.min.css"
       rel="stylesheet"
     />
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: {
+                DEFAULT: "#4F46E5",
+                50: "#EEF2FF",
+                100: "#E0E7FF",
+                200: "#C7D2FE",
+                300: "#A5B4FC",
+                400: "#818CF8",
+                500: "#6366F1",
+                600: "#4F46E5",
+                700: "#4338CA",
+                800: "#3730A3",
+                900: "#312E81",
+              },
+              secondary: {
+                DEFAULT: "#10B981",
+                50: "#ECFDF5",
+                100: "#D1FAE5",
+                200: "#A7F3D0",
+                300: "#6EE7B7",
+                400: "#34D399",
+                500: "#10B981",
+                600: "#059669",
+                700: "#047857",
+                800: "#065F46",
+                900: "#064E3B",
+              },
+              accent: {
+                DEFAULT: "#F59E0B",
+                50: "#FFFBEB",
+                100: "#FEF3C7",
+                200: "#FDE68A",
+                300: "#FCD34D",
+                400: "#FBBF24",
+                500: "#F59E0B",
+                600: "#D97706",
+                700: "#B45309",
+                800: "#92400E",
+                900: "#78350F",
+              },
+            },
+            animation: {
+              "fade-in": "fadeIn 0.5s ease-out",
+              "slide-in": "slideIn 0.5s ease-out",
+            },
+            keyframes: {
+              fadeIn: {
+                "0%": { opacity: "0" },
+                "100%": { opacity: "1" },
+              },
+              slideIn: {
+                "0%": { transform: "translateY(1rem)", opacity: "0" },
+                "100%": { transform: "translateY(0)", opacity: "1" },
+              },
+            },
+          },
+        },
+      };
+    </script>
     <style>
-      /* Estilos generales */
-      body {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: #0c1a30;
-        /* Color de fondo oscuro */
-        color: #e0e0e0;
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        height: 100vh;
-        margin: 0;
-        padding: 20px;
+      @keyframes gradient {
+        0% {
+          background-position: 0% 50%;
+        }
+
+        50% {
+          background-position: 100% 50%;
+        }
+
+        100% {
+          background-position: 0% 50%;
+        }
       }
 
-      /* Contenedor principal */
-      .container {
-        display: flex;
-        width: 100%;
-        max-width: 1200px;
-        background-color: #1e2a4d;
-        /* Fondo del contenedor */
-        border-radius: 10px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-        overflow: hidden;
-      }
-
-      /* Barra lateral */
-      #sidebar {
-        width: 30%;
-        background-color: #243b58;
-        /* Fondo de la barra lateral */
-        padding: 20px;
-        color: #ffffff;
-        position: relative;
-        border-right: 2px solid #1f92f4;
-        /* Borde derecho */
-      }
-
-      /* Título del contenedor */
-      #sidebar h2 {
-        font-size: 1.8em;
-        margin-bottom: 20px;
-        text-align: center;
-        color: #1f92f4;
-        /* Color del título */
-      }
-
-      /* Campo de búsqueda */
-      #search {
-        width: 100%;
-        padding: 10px;
-        margin-bottom: 15px;
-        border-radius: 5px;
-        border: 1px solid #bbb;
-        background-color: #334f7e;
-        /* Fondo del campo de búsqueda */
-        color: #e0e0e0;
-      }
-
-      /* Lista de enlaces */
-      #links {
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-      }
-
-      #links a {
-        color: #ffffff;
-        text-decoration: none;
-        background-color: #1f92f4;
-        /* Color de fondo del enlace */
-        border-radius: 8px;
-        padding: 15px;
-        transition: background 0.3s, transform 0.3s;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-        display: flex;
-        align-items: center;
-      }
-
-      #links a i {
-        margin-right: 10px;
-        /* Espacio entre el icono y el texto */
-      }
-
-      #links a:hover {
-        background-color: #1a7bb6;
-        /* Color al pasar el ratón */
-        transform: translateY(-2px);
-      }
-
-      /* Contador de archivos */
-      #fileCount {
-        color: #1f92f4;
-        /* Color del contador */
-        margin-bottom: 15px;
-        text-align: center;
-        font-weight: bold;
-      }
-
-      /* Área de visualización de Markdown */
-      .markdown-view {
-        width: 70%;
-        background-color: #22365b;
-        /* Fondo del área de visualización */
-        padding: 30px;
-        border-radius: 0 10px 10px 0;
-        overflow-y: auto;
-        max-height: 70vh;
-        font-size: 16px;
-        line-height: 1.6;
-      }
-
-      /* Títulos de Markdown */
-      .markdown-view h1,
-      .markdown-view h2,
-      .markdown-view h3 {
-        color: #1f92f4;
-        /* Color de los títulos */
-        margin-top: 0.8em;
-        border-bottom: 1px solid #334f7e;
-        /* Línea inferior */
-        padding-bottom: 5px;
-      }
-
-      .markdown-view h1 {
-        font-size: 2em;
-      }
-
-      .markdown-view h2 {
-        font-size: 1.5em;
-      }
-
-      .markdown-view h3 {
-        font-size: 1.2em;
-      }
-
-      /* Otros elementos */
-      .markdown-view p,
-      .markdown-view ul li {
-        color: #e0e0e0;
-        margin-bottom: 10px;
-      }
-
-      .markdown-view a {
-        color: #1f92f4;
-        /* Color de los enlaces */
-        text-decoration: underline;
-        transition: color 0.2s;
-      }
-
-      .markdown-view a:hover {
-        color: #a1c4e0;
-        /* Color al pasar el ratón */
-      }
-
-      .markdown-view blockquote {
-        color: #bbb;
-        border-left: 4px solid #1f92f4;
-        /* Borde del bloque */
-        padding-left: 10px;
-        margin: 10px 0;
-        font-style: italic;
-        background-color: #1e2a4d;
-        /* Fondo del bloque */
-        padding: 15px;
-        border-radius: 4px;
-      }
-
-      /* Efecto de scroll en la vista de Markdown */
-      .markdown-view::-webkit-scrollbar {
-        width: 8px;
-      }
-
-      .markdown-view::-webkit-scrollbar-thumb {
-        background-color: #1f92f4;
-        /* Color del scroll */
-        border-radius: 4px;
-      }
-
-      /* Transición suave */
-      * {
-        transition: all 0.3s ease;
+      .animate-gradient {
+        background-size: 200% 200%;
+        animation: gradient 15s ease infinite;
       }
     </style>
   </head>
 
-  <body>
-    <div class="container">
-      <!-- Barra lateral -->
-      <div id="sidebar">
-        <h2>ONAC Database</h2>
-        <input
-          type="text"
-          id="search"
-          placeholder="Buscar archivos..."
-          oninput="filterLinks()"
-        />
-        <div id="fileCount">
-          Total de archivos: <span id="totalCount">3</span>
+  <body
+    class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300 ease-in-out"
+  >
+    <div class="flex h-screen overflow-hidden">
+      <!-- Sidebar -->
+      <aside
+        id="sidebar"
+        class="w-64 bg-white dark:bg-gray-800 shadow-lg transition-all duration-300 ease-in-out transform -translate-x-full sm:translate-x-0"
+      >
+        <div class="flex flex-col h-full">
+          <div
+            class="p-6 bg-gradient-to-r from-primary-600 to-primary-800 text-white animate-gradient"
+          >
+            <h1 class="text-2xl font-bold mb-6">ONAC Database</h1>
+            <div class="relative mb-6">
+              <input
+                type="text"
+                id="search"
+                placeholder="Buscar archivos..."
+                class="w-full bg-white bg-opacity-20 text-white placeholder-gray-200 rounded-full py-2 pl-10 pr-4 focus:outline-none focus:ring-2 focus:ring-white focus:bg-opacity-30 transition duration-150 ease-in-out"
+              />
+              <i class="lucide-search absolute left-3 top-2.5 text-white"></i>
+            </div>
+            <div id="fileCount" class="text-sm text-gray-200">
+              Total de archivos:
+              <span id="totalCount" class="font-semibold">3</span>
+            </div>
+          </div>
+          <nav id="links" class="flex-grow overflow-y-auto px-4 py-2 space-y-2">
+            <button
+              onclick="loadMarkdown('database/contrato-publico.md')"
+              class="w-full flex items-center p-3 rounded-lg transition-all duration-150 ease-in-out hover:bg-primary-50 dark:hover:bg-primary-900 group"
+            >
+              <i
+                class="lucide-file-contract mr-3 text-primary-500 group-hover:text-primary-600 dark:group-hover:text-primary-400"
+              ></i>
+              <span>Contrato Público</span>
+            </button>
+            <button
+              onclick="loadMarkdown('database/clanes-grandes.md')"
+              class="w-full flex items-center p-3 rounded-lg transition-all duration-150 ease-in-out hover:bg-primary-50 dark:hover:bg-primary-900 group"
+            >
+              <i
+                class="lucide-users mr-3 text-primary-500 group-hover:text-primary-600 dark:group-hover:text-primary-400"
+              ></i>
+              <span>Clanes Grandes</span>
+            </button>
+            <button
+              onclick="loadMarkdown('database/usuarios.md')"
+              class="w-full flex items-center p-3 rounded-lg transition-all duration-150 ease-in-out hover:bg-primary-50 dark:hover:bg-primary-900 group"
+            >
+              <i
+                class="lucide-user mr-3 text-primary-500 group-hover:text-primary-600 dark:group-hover:text-primary-400"
+              ></i>
+              <span>Derechos Miembros</span>
+            </button>
+          </nav>
         </div>
-        <div id="links">
-          <a
-            href="#"
-            onclick="loadMarkdown(event, 'database/contrato-publico.md')"
-            ><i class="fas fa-file-contract"></i>Contrato Público</a
-          >
-          <a
-            href="#"
-            onclick="loadMarkdown(event, 'database/clanes-grandes.md')"
-            ><i class="fas fa-users"></i>Clanes Grandes</a
-          >
-          <a href="#" onclick="loadMarkdown(event, 'database/usuarios.md')"
-            ><i class="fas fa-user"></i>Derechos Miembros</a
-          >
-        </div>
-      </div>
+      </aside>
 
-      <!-- Vista de Markdown -->
-      <div id="markdownView" class="markdown-view" style="display: none"></div>
+      <!-- Main Content -->
+      <main
+        class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-50 dark:bg-gray-900"
+      >
+        <div class="container mx-auto px-6 py-8">
+          <div class="flex justify-between items-center mb-6">
+            <h2
+              id="currentFile"
+              class="text-3xl font-semibold text-gray-800 dark:text-gray-200 animate-fade-in"
+            >
+              Bienvenido a ONAC Database
+            </h2>
+            <button
+              id="darkModeToggle"
+              class="p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400 hover:bg-gray-300 dark:hover:bg-gray-600 transition-all duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
+              aria-label="Cambiar modo oscuro"
+            >
+              <i class="lucide-moon dark:hidden"></i>
+              <i class="lucide-sun hidden dark:inline"></i>
+            </button>
+          </div>
+          <div
+            id="versionInfo"
+            class="mb-4 text-sm text-gray-600 dark:text-gray-400 hidden animate-fade-in"
+          >
+            <span class="font-semibold">Versión:</span>
+            <span id="versionNumber"></span>
+            <span class="ml-4 font-semibold">Última actualización:</span>
+            <span id="lastUpdated"></span>
+          </div>
+          <div
+            id="markdownView"
+            class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 transition-all duration-300 ease-in-out animate-slide-in"
+          >
+            <div
+              class="flex items-center justify-center h-64 text-gray-500 dark:text-gray-400"
+            >
+              Selecciona un archivo para ver su contenido
+            </div>
+          </div>
+        </div>
+      </main>
     </div>
 
+    <!-- Mobile menu button -->
+    <button
+      id="mobileMenuButton"
+      class="sm:hidden fixed top-4 left-4 z-50 p-2 bg-white dark:bg-gray-800 rounded-full shadow-md text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
+      aria-label="Abrir menú"
+    >
+      <i class="lucide-menu"></i>
+    </button>
+
     <script>
-      // Función para cargar y mostrar Markdown
-      function loadMarkdown(event, file) {
-        event.preventDefault();
+      function loadMarkdown(file) {
         fetch(file)
           .then((response) => response.text())
           .then((data) => {
+            const { content, metadata } = parseMarkdown(data);
             document.getElementById("markdownView").innerHTML =
-              markdownToHTML(data);
-            document.getElementById("markdownView").style.display = "block";
+              markdownToHTML(content);
+            highlightActiveButton(file);
+            updateCurrentFile(file);
+            updateVersionInfo(metadata);
+            animateElements();
           })
           .catch((error) =>
             console.error("Error al cargar el archivo .md:", error)
           );
       }
 
-      // Conversión mejorada de Markdown a HTML
+      function parseMarkdown(markdown) {
+        const lines = markdown.split("\n");
+        let metadata = {};
+        let content = markdown;
+
+        if (lines[0].trim() === "---") {
+          const metadataEnd = lines.findIndex(
+            (line, index) => index > 0 && line.trim() === "---"
+          );
+          if (metadataEnd !== -1) {
+            const metadataLines = lines.slice(1, metadataEnd);
+            metadataLines.forEach((line) => {
+              const [key, value] = line.split(":").map((s) => s.trim());
+              metadata[key] = value;
+            });
+            content = lines.slice(metadataEnd + 1).join("\n");
+          }
+        }
+
+        return { content, metadata };
+      }
+
+      function updateVersionInfo(metadata) {
+        const versionInfo = document.getElementById("versionInfo");
+        const versionNumber = document.getElementById("versionNumber");
+        const lastUpdated = document.getElementById("lastUpdated");
+
+        if (metadata.version && metadata.updated) {
+          versionNumber.textContent = metadata.version;
+          lastUpdated.textContent = metadata.updated;
+          versionInfo.classList.remove("hidden");
+        } else {
+          versionInfo.classList.add("hidden");
+        }
+      }
+
       function markdownToHTML(markdown) {
         return markdown
-          .replace(/^### (.*$)/gim, "<h3>$1</h3>")
-          .replace(/^## (.*$)/gim, "<h2>$1</h2>")
-          .replace(/^# (.*$)/gim, "<h1>$1</h1>")
-          .replace(/^\> (.*$)/gim, "<blockquote>$1</blockquote>")
-          .replace(/\*\*(.*?)\*\*/gim, "<b>$1</b>")
-          .replace(/\*(.*?)\*/gim, "<i>$1</i>")
           .replace(
-            /\[(.*?)\]\((.*?)\)/gim,
-            "<a href='$2' target='_blank'>$1</a>"
+            /^### (.*$)/gim,
+            '<h3 class="text-xl font-bold mt-6 mb-2 text-secondary-600 dark:text-secondary-400">$1</h3>'
           )
-          .replace(/^- (.*$)/gim, "<ul><li>$1</li></ul>")
+          .replace(
+            /^## (.*$)/gim,
+            '<h2 class="text-2xl font-bold mt-8 mb-3 text-primary-600 dark:text-primary-400">$1</h2>'
+          )
+          .replace(
+            /^# (.*$)/gim,
+            '<h1 class="text-3xl font-bold mt-10 mb-4 text-accent-600 dark:text-accent-400">$1</h1>'
+          )
+          .replace(
+            /^\> (.*$)/gim,
+            '<blockquote class="border-l-4 border-secondary-500 pl-4 py-2 my-4 bg-secondary-50 dark:bg-secondary-900 italic">$1</blockquote>'
+          )
+          .replace(/\*\*(.*?)\*\*/gim, '<strong class="font-bold">$1</strong>')
+          .replace(/\*(.*?)\*/gim, '<em class="italic">$1</em>')
+          .replace(
+            /\[(.*?)\]$$(.*?)$$/gim,
+            '<a href="$2" target="_blank" class="text-primary-600 hover:text-primary-800 dark:text-primary-400 dark:hover:text-primary-300 underline">$1</a>'
+          )
+          .replace(
+            /^- (.*$)/gim,
+            '<ul class="list-disc list-inside"><li>$1</li></ul>'
+          )
           .replace(/<\/ul>\s*<ul>/gim, "")
           .replace(/\n/g, "<br>");
       }
 
-      // Función para filtrar los enlaces
+      function highlightActiveButton(file) {
+        const buttons = document.querySelectorAll("#links button");
+        buttons.forEach((button) => {
+          if (button.onclick.toString().includes(file)) {
+            button.classList.add(
+              "bg-primary-100",
+              "dark:bg-primary-800",
+              "text-primary-800",
+              "dark:text-primary-200"
+            );
+          } else {
+            button.classList.remove(
+              "bg-primary-100",
+              "dark:bg-primary-800",
+              "text-primary-800",
+              "dark:text-primary-200"
+            );
+          }
+        });
+      }
+
+      function updateCurrentFile(file) {
+        const fileName = file.split("/").pop().replace(".md", "");
+        document.getElementById("currentFile").textContent =
+          fileName.charAt(0).toUpperCase() + fileName.slice(1);
+      }
+
       function filterLinks() {
         const searchValue = document
           .getElementById("search")
           .value.toLowerCase();
-        const links = document.querySelectorAll("#links a");
+        const links = document.querySelectorAll("#links button");
         let count = 0;
-
         links.forEach((link) => {
           if (link.textContent.toLowerCase().includes(searchValue)) {
-            link.style.display = "flex"; // Muestra el enlace
+            link.style.display = "flex";
             count++;
           } else {
-            link.style.display = "none"; // Oculta el enlace
+            link.style.display = "none";
           }
         });
-
-        // Actualiza el contador de archivos
         document.getElementById("totalCount").textContent = count;
       }
+
+      function toggleDarkMode() {
+        document.documentElement.classList.toggle("dark");
+      }
+
+      function toggleSidebar() {
+        const sidebar = document.getElementById("sidebar");
+        const overlay = document.createElement("div");
+        overlay.className =
+          "fixed inset-0 bg-black bg-opacity-50 z-40 sm:hidden transition-opacity duration-300 ease-in-out";
+        overlay.onclick = toggleSidebar;
+
+        if (sidebar.classList.contains("-translate-x-full")) {
+          sidebar.classList.remove("-translate-x-full");
+          document.body.appendChild(overlay);
+          setTimeout(() => overlay.classList.add("opacity-100"), 10);
+        } else {
+          sidebar.classList.add("-translate-x-full");
+          overlay.classList.remove("opacity-100");
+          setTimeout(() => document.body.removeChild(overlay), 300);
+        }
+      }
+
+      function animateElements() {
+        const elements = document.querySelectorAll("#markdownView > *");
+        elements.forEach((el, index) => {
+          el.classList.add(
+            "opacity-0",
+            "translate-y-4",
+            "transition-all",
+            "duration-300",
+            "ease-out"
+          );
+          setTimeout(() => {
+            el.classList.remove("opacity-0", "translate-y-4");
+          }, 50 * index);
+        });
+      }
+
+      document.getElementById("search").addEventListener("input", filterLinks);
+      document
+        .getElementById("darkModeToggle")
+        .addEventListener("click", toggleDarkMode);
+      document
+        .getElementById("mobileMenuButton")
+        .addEventListener("click", toggleSidebar);
+
+      if (
+        window.matchMedia &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches
+      ) {
+        document.documentElement.classList.add("dark");
+      }
+
+      window
+        .matchMedia("(prefers-color-scheme: dark)")
+        .addEventListener("change", (e) => {
+          if (e.matches) {
+            document.documentElement.classList.add("dark");
+          } else {
+            document.documentElement.classList.remove("dark");
+          }
+        });
     </script>
   </body>
 </html>

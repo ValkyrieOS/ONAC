@@ -1,3 +1,8 @@
+---
+version: 1.0
+updated: 2024-10-29
+---
+
 # CONTRATO PÚBLICO DE COMPROMISO DE LOS CLANES
 
 **PREÁMBULO**
