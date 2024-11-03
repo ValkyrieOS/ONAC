@@ -3,74 +3,118 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lista de Archivos HTML</title>
+    <title>ONAC Database Files</title>
     <style>
+      @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap");
+      :root {
+        --bg-color: #1a1a1a;
+        --container-bg: #2a2a2a;
+        --text-color: #e0e0e0;
+        --highlight-color: #4a9eff;
+        --hover-color: #74b6ff;
+      }
       body {
-        font-family: Arial, sans-serif;
+        font-family: "Roboto", Arial, sans-serif;
         line-height: 1.6;
         margin: 0;
         padding: 20px;
-        background-color: #1a1a1a;
-        color: #e0e0e0;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
       }
       .container {
+        width: 100%;
         max-width: 800px;
-        margin: 0 auto;
-        background-color: #2a2a2a;
-        padding: 20px;
-        border-radius: 5px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        background-color: var(--container-bg);
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        transition: transform 0.3s ease;
+      }
+      .container:hover {
+        transform: translateY(-5px);
       }
       h1 {
         color: #ffffff;
         text-align: center;
+        font-size: 2.5rem;
+        margin-bottom: 30px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      }
+      #search {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 25px;
+        border: none;
+        border-radius: 5px;
+        background-color: #3a3a3a;
+        color: var(--text-color);
+        font-size: 16px;
+        transition: all 0.3s ease;
+      }
+      #search:focus {
+        outline: none;
+        box-shadow: 0 0 10px rgba(74, 158, 255, 0.5);
+        background-color: #454545;
       }
       ul {
         list-style-type: none;
         padding: 0;
       }
       li {
-        margin-bottom: 10px;
-        transition: background-color 0.3s ease;
-        padding: 5px;
-        border-radius: 3px;
+        margin-bottom: 15px;
+        transition: all 0.3s ease;
+        padding: 10px;
+        border-radius: 5px;
+        background-color: #3a3a3a;
       }
       li:hover {
-        background-color: #3a3a3a;
+        background-color: #454545;
+        transform: translateX(5px);
       }
       a {
-        color: #4a9eff;
+        color: var(--highlight-color);
         text-decoration: none;
-        transition: color 0.3s ease;
+        transition: all 0.3s ease;
         display: block;
+        font-weight: 400;
       }
       a:hover {
-        color: #74b6ff;
-      }
-      #search {
-        width: 100%;
-        padding: 10px;
-        margin-bottom: 20px;
-        border: none;
-        border-radius: 3px;
-        background-color: #3a3a3a;
-        color: #e0e0e0;
-        font-size: 16px;
-      }
-      #search:focus {
-        outline: none;
-        box-shadow: 0 0 5px rgba(74, 158, 255, 0.5);
+        color: var(--hover-color);
       }
       .no-results {
         text-align: center;
         color: #888;
         font-style: italic;
+        padding: 20px;
+        background-color: #3a3a3a;
+        border-radius: 5px;
+        animation: fadeIn 0.5s ease;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      @media (max-width: 600px) {
+        .container {
+          padding: 20px;
+        }
+        h1 {
+          font-size: 2rem;
+        }
       }
     </style>
   </head>
   <body>
     <div class="container">
-      <h1>Lista de Archivos HTML</h1>
+      <h1>ONAC Database Files</h1>
       <input type="text" id="search" placeholder="Buscar archivos..." />
       <ul id="file-list">
         <li>
@@ -83,18 +127,22 @@
             >Clanes Grandes</a
           >
         </li>
-        <li><a href="database/usuarios.html" target="_blank">Usuarios</a></li>
+        <li>
+          <a href="database/usuarios.html" target="_blank">Usuarios</a>
+        </li>
+        <li>
+          <a href="database/financiamiento.html" target="_blank"
+            >Financiamiento</a
+          >
+        </li>
       </ul>
     </div>
-
     <script>
       const searchInput = document.getElementById("search");
       const fileList = document.getElementById("file-list");
       const files = Array.from(fileList.getElementsByTagName("li"));
-
       searchInput.addEventListener("input", (e) => {
         const query = e.target.value.toLowerCase();
-
         let hasResults = false;
         files.forEach((file) => {
           const text = file.textContent.toLowerCase();
@@ -105,8 +153,6 @@
             file.style.display = "none";
           }
         });
-
-        // Muestra un mensaje si no hay resultados
         if (!hasResults) {
           if (!document.querySelector(".no-results")) {
             const noResults = document.createElement("li");
