@@ -53,6 +53,13 @@
       "role": "Miembro",
       "image": "img/veleta.webp",
       "status": "pendiente"
+    },
+    {
+      "name": "Picantes",
+      "role": "Miembro",
+      "image": "img/picantes.webp",
+      "status": "baneado",
+      "motivo": "No se pudo encontrar información sobre el usuario"
     }
   ]
 }
