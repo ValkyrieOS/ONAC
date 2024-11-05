@@ -10,7 +10,9 @@
       "name": "Real-Minty",
       "role": "Miembro",
       "image": "img/realminty.webp",
-      "status": "activo"
+      "status": "inhabilitado",
+      "motivo":"Mucha inactividad",
+      "fechaReactivacion": "2024-12-03"
     },
     {
       "name": "KDS",
