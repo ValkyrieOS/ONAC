@@ -11,7 +11,7 @@
       "role": "Miembro",
       "image": "img/realminty.webp",
       "status": "inhabilitado",
-      "motivo":"Mucha inactividad",
+      "motivo": "Mucha inactividad",
       "fechaReactivacion": "2024-12-03"
     },
     {
@@ -62,6 +62,12 @@
       "image": "img/picantes.webp",
       "status": "baneado",
       "motivo": "Staff estafadores"
+    },
+    {
+      "name": "WNTD",
+      "role": "Miembro",
+      "image": "img/wntd.webp",
+      "status": "activo"
     }
   ]
 }
