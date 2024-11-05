@@ -9,7 +9,6 @@
       href="https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap"
       rel="stylesheet"
     />
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
       tailwind.config = {
         darkMode: "class",
@@ -31,9 +30,20 @@
       body {
         font-family: "Onest", sans-serif;
       }
+      @keyframes blink {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.5;
+        }
+      }
+      .blink-critical {
+        animation: blink 1s linear infinite;
+      }
     </style>
   </head>
-
   <body
     class="bg-onac-dark text-gray-100 font-onest leading-normal tracking-normal min-h-screen flex flex-col"
   >
@@ -61,6 +71,7 @@
                 <a
                   href="balance.html"
                   class="text-onac-blue font-semibold transition-colors duration-200 text-lg"
+                  aria-current="page"
                   >Balance</a
                 >
               </li>
@@ -73,21 +84,12 @@
     <main class="flex-grow">
       <div class="container mx-auto px-4 py-8">
         <h1 class="text-4xl font-bold text-onac-blue mb-8">Balance ONAC</h1>
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <div class="lg:col-span-2">
-            <div
-              id="balanceContainer"
-              class="grid grid-cols-1 md:grid-cols-2 gap-6"
-            >
-              <!-- Las tarjetas de balance se insertarán aquí dinámicamente -->
-            </div>
-          </div>
-          <div class="bg-gray-800 rounded-lg shadow-xl p-6">
-            <h2 class="text-2xl font-bold text-onac-blue mb-4">
-              Distribución de Balance
-            </h2>
-            <canvas id="balanceChart"></canvas>
-          </div>
+        <div id="alertContainer" class="mb-8"></div>
+        <div
+          id="balanceContainer"
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+        >
+          <!-- Las tarjetas de balance se insertarán aquí dinámicamente -->
         </div>
       </div>
     </main>
@@ -108,81 +110,101 @@
             color: "text-red-600",
             category: "Balance Crítico",
             bgColor: "bg-red-900",
+            alert: true,
+            alertLevel: "crítico",
+            borderColor: "border-red-600",
+            animation: "blink-critical",
           };
         if (balance <= 50000)
           return {
-            color: "text-orange-500",
+            color: "text-red-500",
             category: "Balance Muy Bajo",
-            bgColor: "bg-orange-900",
+            bgColor: "bg-red-800",
+            alert: true,
+            alertLevel: "muy bajo",
+            borderColor: "border-red-500",
           };
         if (balance <= 100000)
           return {
-            color: "text-yellow-500",
+            color: "text-red-400",
             category: "Balance Bajo",
-            bgColor: "bg-yellow-900",
+            bgColor: "bg-red-700",
+            alert: true,
+            alertLevel: "bajo",
+            borderColor: "border-red-400",
           };
         if (balance <= 500000)
           return {
             color: "text-yellow-300",
             category: "Balance Moderado Bajo",
             bgColor: "bg-yellow-800",
+            borderColor: "border-yellow-300",
           };
         if (balance <= 1000000)
           return {
             color: "text-green-400",
             category: "Balance Moderado",
             bgColor: "bg-green-800",
+            borderColor: "border-green-400",
           };
         if (balance <= 5000000)
           return {
             color: "text-green-500",
             category: "Balance Saludable",
             bgColor: "bg-green-900",
+            borderColor: "border-green-500",
           };
         if (balance <= 10000000)
           return {
             color: "text-blue-400",
             category: "Balance Muy Saludable",
             bgColor: "bg-blue-900",
+            borderColor: "border-blue-400",
           };
         if (balance <= 50000000)
           return {
             color: "text-blue-500",
             category: "Balance Excelente",
             bgColor: "bg-blue-800",
+            borderColor: "border-blue-500",
           };
         return {
           color: "text-purple-500",
           category: "Balance Extraordinario",
           bgColor: "bg-purple-900",
+          borderColor: "border-purple-500",
         };
       }
 
       function createBalanceCard(modalidad) {
-        const { color, category, bgColor } = getBalanceInfo(modalidad.balance);
-        let alertasHtml = "";
-        if (modalidad.alertas && modalidad.alertas.length > 0) {
-          alertasHtml = `
-                    <div class="mt-4">
-                        <h3 class="text-lg font-semibold text-red-500 mb-2 flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
-                            </svg>
-                            Alertas:
-                        </h3>
-                        <ul class="list-disc list-inside">
-                            ${modalidad.alertas
-                              .map(
-                                (alerta) =>
-                                  `<li class="text-red-400">${alerta}</li>`
-                              )
-                              .join("")}
-                        </ul>
+        const {
+          color,
+          category,
+          bgColor,
+          alert,
+          alertLevel,
+          borderColor,
+          animation,
+        } = getBalanceInfo(modalidad.balance);
+        let alertaHtml = "";
+        if (alert) {
+          alertaHtml = `
+                    <div class="mt-4 p-3 ${bgColor} rounded-lg ${
+            animation || ""
+          }">
+                        <p class="text-lg font-semibold ${color}">
+                            ¡Alerta! Balance ${alertLevel}
+                        </p>
+                        <p class="text-sm ${color}">
+                            Se requieren medidas inmediatas para mejorar el balance.
+                        </p>
                     </div>
                 `;
         }
         return `
-                <div class="bg-gray-800 border-gray-700 rounded-lg shadow-xl p-6 transition-all duration-300 hover:shadow-2xl hover:scale-105">
+                <div class="bg-gray-800 border-2 ${borderColor} rounded-lg shadow-xl p-6 transition-all duration-300 hover:shadow-2xl hover:scale-105 ${
+          animation || ""
+        }">
                     <h2 class="text-2xl font-bold text-onac-blue mb-4">${
                       modalidad.nombre
                     }</h2>
@@ -194,71 +216,100 @@
                             ${category}
                         </span>
                     </div>
-                    ${alertasHtml}
+                    ${alertaHtml}
                 </div>
             `;
       }
 
-      function createBalanceChart(modalidades) {
-        const ctx = document.getElementById("balanceChart").getContext("2d");
-        new Chart(ctx, {
-          type: "doughnut",
-          data: {
-            labels: modalidades.map((m) => m.nombre),
-            datasets: [
-              {
-                data: modalidades.map((m) => m.balance),
-                backgroundColor: [
-                  "#4fc3f7",
-                  "#ff9800",
-                  "#4caf50",
-                  "#f44336",
-                  "#9c27b0",
-                ],
-              },
-            ],
-          },
-          options: {
-            responsive: true,
-            plugins: {
-              legend: {
-                position: "bottom",
-              },
-              title: {
-                display: true,
-                text: "Distribución de Balance por Modalidad",
-              },
+      async function sendDiscordWebhook(message) {
+        const webhookUrl =
+          "https://discord.com/api/webhooks/1303283967096786955/zlJePtfHOvK08KHz5IaKpBD4f9MomJosKEX5rfL2lR_LKWiJHwvhuZOpj3UWlRHneFum";
+        try {
+          const response = await fetch(webhookUrl, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
             },
-          },
-        });
+            body: JSON.stringify({ content: message }),
+          });
+          if (response.ok) {
+            console.log("Mensaje enviado a Discord con éxito");
+          } else {
+            console.error("Error al enviar mensaje a Discord");
+          }
+        } catch (error) {
+          console.error("Error al enviar mensaje a Discord:", error);
+        }
+      }
+
+      function createGlobalAlert(modalidades) {
+        const alertContainer = document.getElementById("alertContainer");
+        const lowBalanceModalidades = modalidades.filter(
+          (m) => getBalanceInfo(m.balance).alert
+        );
+
+        if (lowBalanceModalidades.length > 0) {
+          const alertHtml = `
+                    <div class="bg-red-800 text-red-100 p-4 rounded-lg mb-4 border-2 border-red-600 ${
+                      lowBalanceModalidades.some((m) => m.balance <= 10000)
+                        ? "blink-critical"
+                        : ""
+                    }">
+                        <h2 class="text-2xl font-bold mb-2">¡Alerta de Balance Bajo!</h2>
+                        <p class="text-lg">Las siguientes modalidades requieren atención inmediata:</p>
+                        <ul class="list-disc list-inside mt-2">
+                            ${lowBalanceModalidades
+                              .map(
+                                (m) =>
+                                  `<li class="text-lg">${
+                                    m.nombre
+                                  }: <span class="font-bold">${m.balance.toLocaleString(
+                                    "es-ES"
+                                  )} $</span> - ${
+                                    getBalanceInfo(m.balance).category
+                                  }</li>`
+                              )
+                              .join("")}
+                        </ul>
+                        <p class="mt-4 text-lg font-semibold">Se recomienda tomar medidas urgentes para mejorar estos balances.</p>
+                        <button id="sendWebhookBtn" class="mt-4 bg-red-400 hover:bg-red-700 text-white font-bold py-2 px-4 rounded text-lg">
+                            Enviar Alerta a Discord
+                        </button>
+                    </div>
+                `;
+          alertContainer.innerHTML = alertHtml;
+
+          document
+            .getElementById("sendWebhookBtn")
+            .addEventListener("click", () => {
+              const message = `¡Alerta de Balance Bajo en los siguientes servidores!\n${lowBalanceModalidades
+                .map(
+                  (m) =>
+                    `${m.nombre}: ${m.balance.toLocaleString("es-ES")} $ - ${
+                      getBalanceInfo(m.balance).category
+                    }`
+                )
+                .join("\n")}`;
+              sendDiscordWebhook(message);
+            });
+        }
       }
 
       function loadBalances() {
         const data = {
           modalidades: [
-            {
-              nombre: "1.20 #1",
-              balance: 1126000,
-            },
-            {
-              nombre: "1.20 #2",
-              balance: 3900000,
-            },
-            {
-              nombre: "1.20 #3",
-              balance: 710000,
-            },
-            {
-              nombre: "1.18 #1",
-              balance: 632000,
-            },
+            { nombre: "1.20 #1", balance: 1128000 },
+            { nombre: "1.20 #2", balance: 3940000 },
+            { nombre: "1.20 #3", balance: 690000 },
+            { nombre: "1.18 #1", balance: 632000 },
           ],
         };
         const balanceContainer = document.getElementById("balanceContainer");
-        data.modalidades.forEach((modalidad) => {
-          balanceContainer.innerHTML += createBalanceCard(modalidad);
-        });
-        createBalanceChart(data.modalidades);
+        const balanceCards = data.modalidades
+          .map((modalidad) => createBalanceCard(modalidad))
+          .join("");
+        balanceContainer.innerHTML = balanceCards;
+        createGlobalAlert(data.modalidades);
       }
 
       document.addEventListener("DOMContentLoaded", loadBalances);
