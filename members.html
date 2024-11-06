@@ -31,31 +31,33 @@
     </script>
   </head>
   <body
-    class="bg-onac-dark text-onac-light min-h-screen flex flex-col font-sans"
+    class="bg-gradient-to-br from-onac-dark to-gray-900 text-onac-light min-h-screen flex flex-col font-sans"
   >
-    <header class="bg-gray-800 text-white py-6 sticky top-0 z-10 shadow-lg">
+    <header
+      class="bg-gray-800 bg-opacity-50 backdrop-filter backdrop-blur-lg text-white py-6 sticky top-0 z-10 shadow-lg"
+    >
       <div class="container mx-auto px-4">
         <div class="flex justify-between items-center">
-          <h1 class="text-3xl font-bold text-onac-blue">ONAC</h1>
+          <h1 class="text-3xl font-bold text-onac-blue">ONAC Dashboard</h1>
           <nav>
             <ul class="flex space-x-6">
               <li>
                 <a
-                  href="index.html"
+                  href="#"
                   class="hover:text-onac-blue transition-colors duration-200 text-lg"
                   >Inicio</a
                 >
               </li>
               <li>
                 <a
-                  href="members.html"
+                  href="#"
                   class="hover:text-onac-blue transition-colors duration-200 text-lg"
                   >Miembros</a
                 >
               </li>
               <li>
                 <a
-                  href="balance.html"
+                  href="#"
                   class="hover:text-onac-blue font-semibold transition-colors duration-200 text-lg"
                   >Balance</a
                 >
@@ -72,7 +74,10 @@
           <h2 class="text-3xl font-semibold mb-6 text-onac-blue">
             Resumen de Clanes
           </h2>
-          <div id="clanSummary" class="grid grid-cols-1 md:grid-cols-4 gap-6">
+          <div
+            id="clanSummary"
+            class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6"
+          >
             <!-- El resumen de clanes se insertará aquí -->
           </div>
         </div>
@@ -87,12 +92,58 @@
         </div>
       </div>
 
-      <div id="clanStatus" class="grid grid-cols-1 lg:grid-cols-4 gap-8">
-        <!-- Los estados de los clanes se insertarán aquí -->
+      <div class="mb-12">
+        <h2 class="text-3xl font-semibold mb-6 text-onac-blue">
+          Clanes Activos
+        </h2>
+        <div
+          id="activeClanStatus"
+          class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8"
+        >
+          <!-- Los clanes activos se insertarán aquí -->
+        </div>
+      </div>
+
+      <div class="mb-12">
+        <h2 class="text-3xl font-semibold mb-6 text-onac-blue">
+          Clanes Pendientes
+        </h2>
+        <div
+          id="pendingClanStatus"
+          class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8"
+        >
+          <!-- Los clanes pendientes se insertarán aquí -->
+        </div>
+      </div>
+
+      <div class="mb-12">
+        <h2 class="text-3xl font-semibold mb-6 text-onac-blue">
+          Clanes Inhabilitados
+        </h2>
+        <div
+          id="disabledClanStatus"
+          class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8"
+        >
+          <!-- Los clanes inhabilitados se insertarán aquí -->
+        </div>
+      </div>
+
+      <div class="mb-12">
+        <h2 class="text-3xl font-semibold mb-6 text-onac-blue">
+          Clanes Baneados
+        </h2>
+        <div
+          id="bannedClanStatus"
+          class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8"
+        >
+          <!-- Los clanes baneados se insertarán aquí -->
+        </div>
       </div>
     </main>
 
-    <footer class="bg-onac-dark text-center py-6 border-t border-gray-800">
+    <footer
+      class="bg-gray-800 bg-opacity-50 backdrop-filter backdrop-blur-lg text-center py-6 border-t border-gray-700"
+    >
       <p class="text-sm text-gray-400">
         © 2024 ONAC - Organización de NauticMC para la Ayuda y el Crecimiento
       </p>
@@ -114,6 +165,16 @@
         } catch (error) {
           console.error("Error al cargar los miembros:", error);
           return [];
+        }
+      }
+
+      function formatBalance(balance) {
+        if (balance >= 1000000) {
+          return (balance / 1000000).toFixed(1) + "M";
+        } else if (balance >= 1000) {
+          return (balance / 1000).toFixed(1) + "k";
+        } else {
+          return balance.toString();
         }
       }
 
@@ -159,7 +220,7 @@
         return daysRemaining > 0 ? daysRemaining : 0;
       }
 
-      function createClanStatusCard(status, members) {
+      function createClanStatusCard(member) {
         const statusColors = {
           activo: "bg-green-500",
           pendiente: "bg-yellow-500",
@@ -175,100 +236,126 @@
         };
 
         const card = document.createElement("div");
-        card.className = `${statusColors[status]} rounded-lg overflow-hidden shadow-lg`;
-
-        const title = status.charAt(0).toUpperCase() + status.slice(1);
-        const count = members.length;
+        card.className = `${
+          statusColors[member.status]
+        } rounded-lg overflow-hidden shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer`;
+        card.onclick = () => toggleClanDetails(member.name);
 
         card.innerHTML = `
                 <div class="p-6">
-                    <h2 class="text-3xl font-bold mb-6 flex items-center justify-between">
-                        <span>Clanes ${title}s</span>
-                        <i class="fas ${statusIcons[status]} text-4xl"></i>
-                    </h2>
-                    <ul class="space-y-6">
-                        ${members
-                          .map(
-                            (member) => `
-                            <li class="bg-black bg-opacity-20 p-4 rounded-lg flex items-center space-x-4 transform transition-all duration-300 hover:scale-105">
-                                <img src="${member.image}" alt="${
-                              member.name
-                            }" class="w-16 h-16 rounded-full object-cover border-2 border-white">
-                                <div class="flex-grow">
-                                    <h3 class="text-xl font-semibold">${
-                                      member.name
-                                    }</h3>
-                                    <p class="text-sm opacity-75">${
-                                      member.role
-                                    }</p>
-                                    ${
-                                      member.motivo
-                                        ? `<p class="text-sm text-red-300 mt-1">Motivo: ${member.motivo}</p>`
-                                        : ""
-                                    }
-                                    ${
-                                      member.fechaReactivacion
-                                        ? `<p class="text-sm text-green-300 mt-1">
-                                            Fecha de reactivación: ${
-                                              member.fechaReactivacion ===
-                                              "indefinido"
-                                                ? "Indefinido"
-                                                : new Date(
-                                                    member.fechaReactivacion
-                                                  ).toLocaleDateString()
-                                            }
-                                            ${
-                                              member.fechaReactivacion !==
-                                              "indefinido"
-                                                ? `(${calculateDaysRemaining(
-                                                    member.fechaReactivacion
-                                                  )} días restantes)`
-                                                : ""
-                                            }
-                                        </p>`
-                                        : ""
-                                    }
-                                </div>
-                            </li>
+                    <div class="flex items-center justify-between mb-4">
+                        <img src="${member.image}" alt="${
+          member.name
+        }" class="w-16 h-16 rounded-full object-cover border-2 border-white">
+                        <i class="fas ${
+                          statusIcons[member.status]
+                        } text-4xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">${member.name}</h3>
+                    <p class="text-lg mb-2">${member.role}</p>
+                    <p class="text-lg mb-2">Status: ${member.status}</p>
+                    <div id="details-${member.name}" class="hidden mt-4">
+                        <p class="text-xl font-bold mb-2">Aportación: $${formatBalance(
+                          member.aportacion
+                        )}</p>
+                        ${
+                          member.motivo
+                            ? `<p class="text-sm text-red-300 mb-2">Motivo: ${member.motivo}</p>`
+                            : ""
+                        }
+                        ${
+                          member.fechaReactivacion
+                            ? `
+                            <p class="text-sm text-green-300">
+                                Fecha de reactivación: ${
+                                  member.fechaReactivacion === "indefinido"
+                                    ? "Indefinido"
+                                    : new Date(
+                                        member.fechaReactivacion
+                                      ).toLocaleDateString()
+                                }
+                                ${
+                                  member.fechaReactivacion !== "indefinido"
+                                    ? `(${calculateDaysRemaining(
+                                        member.fechaReactivacion
+                                      )} días restantes)`
+                                    : ""
+                                }
+                            </p>
                         `
-                          )
-                          .join("")}
-                    </ul>
+                            : ""
+                        }
+                    </div>
                 </div>
             `;
 
         return card;
       }
 
+      function toggleClanDetails(clanName) {
+        const detailsElement = document.getElementById(`details-${clanName}`);
+        if (detailsElement) {
+          detailsElement.classList.toggle("hidden");
+        }
+      }
+
       async function updateDashboard() {
         const members = await fetchMembers();
         console.log("Miembros obtenidos:", members);
-        const clanStatusContainer = document.getElementById("clanStatus");
         const clanSummaryContainer = document.getElementById("clanSummary");
+        const activeClanContainer = document.getElementById("activeClanStatus");
+        const pendingClanContainer =
+          document.getElementById("pendingClanStatus");
+        const disabledClanContainer =
+          document.getElementById("disabledClanStatus");
+        const bannedClanContainer = document.getElementById("bannedClanStatus");
 
-        if (!clanStatusContainer || !clanSummaryContainer) {
+        if (
+          !clanSummaryContainer ||
+          !activeClanContainer ||
+          !pendingClanContainer ||
+          !disabledClanContainer ||
+          !bannedClanContainer
+        ) {
           console.error("No se encontraron los contenedores necesarios");
           return;
         }
 
-        clanStatusContainer.innerHTML = "";
         clanSummaryContainer.innerHTML = "";
+        activeClanContainer.innerHTML = "";
+        pendingClanContainer.innerHTML = "";
+        disabledClanContainer.innerHTML = "";
+        bannedClanContainer.innerHTML = "";
 
         const statuses = ["activo", "pendiente", "baneado", "inhabilitado"];
+        const statusCounts = {};
+
+        members.forEach((member) => {
+          statusCounts[member.status] = (statusCounts[member.status] || 0) + 1;
+          const card = createClanStatusCard(member);
+          switch (member.status) {
+            case "activo":
+              activeClanContainer.appendChild(card);
+              break;
+            case "pendiente":
+              pendingClanContainer.appendChild(card);
+              break;
+            case "inhabilitado":
+              disabledClanContainer.appendChild(card);
+              break;
+            case "baneado":
+              bannedClanContainer.appendChild(card);
+              break;
+          }
+        });
+
         statuses.forEach((status) => {
-          const membersOfStatus = members.filter(
-            (member) => member.status === status
-          );
-          console.log(`Miembros ${status}:`, membersOfStatus);
-          if (membersOfStatus.length > 0) {
+          if (statusCounts[status]) {
             const summaryCard = createClanSummaryCard(
               status,
-              membersOfStatus.length
+              statusCounts[status]
             );
             clanSummaryContainer.appendChild(summaryCard);
-
-            const statusCard = createClanStatusCard(status, membersOfStatus);
-            clanStatusContainer.appendChild(statusCard);
           }
         });
 
@@ -296,21 +383,36 @@
                 {
                   name: "✅ Clanes Activos",
                   value: `Total: ${activos.length}\n${activos
-                    .map((m) => `• ${m.name}`)
+                    .map(
+                      (m) =>
+                        `• ${m.name} (Aportación: $${formatBalance(
+                          m.aportacion
+                        )})`
+                    )
                     .join("\n")}`,
                   inline: false,
                 },
                 {
                   name: "⏳ Clanes Pendientes",
                   value: `Total: ${pendientes.length}\n${pendientes
-                    .map((m) => `• ${m.name}`)
+                    .map(
+                      (m) =>
+                        `• ${m.name} (Aportación: $${formatBalance(
+                          m.aportacion
+                        )})`
+                    )
                     .join("\n")}`,
                   inline: false,
                 },
                 {
                   name: "🚫 Clanes Baneados",
                   value: `Total: ${baneados.length}\n${baneados
-                    .map((m) => `• ${m.name} (Motivo: ${m.motivo})`)
+                    .map(
+                      (m) =>
+                        `• ${m.name} (Motivo: ${
+                          m.motivo
+                        }, Aportación: $${formatBalance(m.aportacion)})`
+                    )
                     .join("\n")}`,
                   inline: false,
                 },
@@ -327,7 +429,7 @@
                           : `${new Date(
                               m.fechaReactivacion
                             ).toLocaleDateString()} (${daysRemaining} días restantes)`
-                      })`;
+                      }, Aportación: $${formatBalance(m.aportacion)})`;
                     })
                     .join("\n")}`,
                   inline: false,
