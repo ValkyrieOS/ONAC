@@ -8,15 +8,6 @@
       "aportacion": 5758000
     },
     {
-      "name": "Real-Minty",
-      "role": "Miembro",
-      "image": "img/realminty.webp",
-      "status": "inhabilitado",
-      "motivo": "Mucha inactividad",
-      "fechaReactivacion": "2024-12-03",
-      "aportacion": 0
-    },
-    {
       "name": "KDS",
       "role": "Miembro",
       "image": "img/kds.webp",
@@ -34,13 +25,6 @@
       "name": "NauticWarriors",
       "role": "Miembro",
       "image": "img/nauticwarriors.webp",
-      "status": "activo",
-      "aportacion": 0
-    },
-    {
-      "name": "incognito",
-      "role": "Miembro",
-      "image": "img/incognito.webp",
       "status": "activo",
       "aportacion": 0
     },
@@ -85,7 +69,16 @@
       "role": "Miembro",
       "image": "img/mountainclub.webp",
       "status": "activo",
-      "aportacion": 632000
+      "aportacion": 632000,
+      "nuevo": true
+    },
+    {
+      "name": "tempestad",
+      "role": "Miembro",
+      "image": "img/tempestad.webp",
+      "status": "activo",
+      "aportacion": 0,
+      "nuevo": true
     }
   ]
 }
