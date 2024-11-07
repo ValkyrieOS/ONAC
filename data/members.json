@@ -51,7 +51,7 @@
     },
     {
       "name": "Picantes",
-      "role": "Miembro",
+      "role": "Baneado",
       "image": "img/picantes.webp",
       "status": "baneado",
       "motivo": "Staff estafadores",
@@ -62,20 +62,29 @@
       "role": "Miembro",
       "image": "img/wntd.webp",
       "status": "activo",
-      "aportacion": 0
-    },
-    {
-      "name": "Mountain Club",
-      "role": "Miembro",
-      "image": "img/mountainclub.webp",
-      "status": "activo",
-      "aportacion": 632000,
+      "aportacion": 0,
       "nuevo": true
     },
     {
       "name": "tempestad",
       "role": "Miembro",
       "image": "img/tempestad.webp",
+      "status": "activo",
+      "aportacion": 0,
+      "nuevo": true
+    },
+    {
+      "name": "Real-Minty",
+      "role": "Baneado",
+      "image": "img/realminty.webp",
+      "status": "baneado",
+      "motivo": "Staff estafadores",
+      "aportacion": 0
+    },
+    {
+      "name": "Illuminati Bedrock",
+      "role": "Miembro",
+      "image": "img/illuminatibedrock.gif",
       "status": "activo",
       "aportacion": 0,
       "nuevo": true
