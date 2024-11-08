@@ -33,31 +33,45 @@
   <body
     class="bg-gradient-to-br from-gray-900 to-onac-dark text-onac-light min-h-screen flex flex-col font-sans"
   >
-  <header class="bg-gray-800 text-white py-6 sticky top-0 z-10 shadow-lg">
-    <div class="container mx-auto px-4">
+    <header class="bg-gray-800 text-white py-6 sticky top-0 z-10 shadow-lg">
+      <div class="container mx-auto px-4">
         <div class="flex justify-between items-center">
-            <h1 class="text-3xl font-bold text-onac-blue">ONAC</h1>
-            <nav>
-                <ul class="flex space-x-6">
-                    <li>
-                        <a href="index.html"
-                            class="hover:text-onac-blue transition-colors duration-200 text-lg">Inicio</a>
-                    </li>
-                    <li>
-                        <a href="#" class="hover:text-onac-blue transition-colors duration-200 text-lg">Miembros</a>
-                    </li>
-                    <li>
-                        <a href="balance.html"
-                            class="hover:text-onac-blue font-semibold transition-colors duration-200 text-lg">Balance</a>
-                    </li>
-                    <a href="pagos.html"
-                    class="hover:text-onac-blue font-semibold transition-colors duration-200 text-lg">Pagos</a>
-                    </li>
-                </ul>
-            </nav>
+          <h1 class="text-3xl font-bold text-onac-blue">ONAC</h1>
+          <nav>
+            <ul class="flex space-x-6">
+              <li>
+                <a
+                  href="index.html"
+                  class="hover:text-onac-blue transition-colors duration-200 text-lg"
+                  >Inicio</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="hover:text-onac-blue transition-colors duration-200 text-lg"
+                  >Miembros</a
+                >
+              </li>
+              <li>
+                <a
+                  href="balance.html"
+                  class="hover:text-onac-blue font-semibold transition-colors duration-200 text-lg"
+                  >Balance</a
+                >
+              </li>
+              <li>
+                <a
+                  href="pagos.html"
+                  class="hover:text-onac-blue font-semibold transition-colors duration-200 text-lg"
+                  >Pagos</a
+                >
+              </li>
+            </ul>
+          </nav>
         </div>
-    </div>
-</header>
+      </div>
+    </header>
     <main class="flex-grow container mx-auto px-4 py-8">
       <div class="grid grid-cols-1 lg:grid-cols-4 gap-8 mb-12">
         <div class="lg:col-span-3">
@@ -79,6 +93,10 @@
             <i class="fab fa-discord mr-2"></i> Enviar Resumen a Discord
           </button>
           <div id="lastUpdate" class="text-center text-gray-400 text-sm"></div>
+          <div
+            id="totalBalance"
+            class="text-center text-2xl font-bold mt-4 text-onac-blue"
+          ></div>
         </div>
       </div>
 
@@ -87,14 +105,13 @@
           <h2
             class="text-3xl font-semibold mb-6 text-onac-blue flex items-center"
           >
-            <i class="fas fa-check-circle mr-3 text-green-500"></i>Clanes
-            Activos
+            <i class="fas fa-coffee mr-3 text-brown-500"></i>Clanes Java
           </h2>
           <div
-            id="activeClanStatus"
+            id="javaClans"
             class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8"
           >
-            <!-- Los clanes activos se insertarán aquí -->
+            <!-- Los clanes Java se insertarán aquí -->
           </div>
         </section>
 
@@ -102,13 +119,13 @@
           <h2
             class="text-3xl font-semibold mb-6 text-onac-blue flex items-center"
           >
-            <i class="fas fa-clock mr-3 text-yellow-500"></i>Clanes Pendientes
+            <i class="fas fa-cube mr-3 text-blue-500"></i>Clanes Bedrock
           </h2>
           <div
-            id="pendingClanStatus"
+            id="bedrockClans"
             class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8"
           >
-            <!-- Los clanes pendientes se insertarán aquí -->
+            <!-- Los clanes Bedrock se insertarán aquí -->
           </div>
         </section>
 
@@ -116,28 +133,13 @@
           <h2
             class="text-3xl font-semibold mb-6 text-onac-blue flex items-center"
           >
-            <i class="fas fa-exclamation-triangle mr-3 text-onac-orange"></i
-            >Clanes Inhabilitados
+            <i class="fas fa-power-off mr-3 text-gray-500"></i>Clanes Inactivos
           </h2>
           <div
-            id="disabledClanStatus"
+            id="inactiveClans"
             class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8"
           >
-            <!-- Los clanes inhabilitados se insertarán aquí -->
-          </div>
-        </section>
-
-        <section>
-          <h2
-            class="text-3xl font-semibold mb-6 text-onac-blue flex items-center"
-          >
-            <i class="fas fa-ban mr-3 text-red-500"></i>Clanes Baneados
-          </h2>
-          <div
-            id="bannedClanStatus"
-            class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8"
-          >
-            <!-- Los clanes baneados se insertarán aquí -->
+            <!-- Los clanes inactivos se insertarán aquí -->
           </div>
         </section>
       </div>
@@ -185,14 +187,14 @@
           activo: "bg-green-500",
           pendiente: "bg-yellow-500",
           baneado: "bg-red-500",
-          inhabilitado: "bg-onac-orange",
+          inactivo: "bg-gray-500",
         };
 
         const statusIcons = {
           activo: "fa-check-circle",
           pendiente: "fa-clock",
           baneado: "fa-ban",
-          inhabilitado: "fa-exclamation-triangle",
+          inactivo: "fa-power-off",
         };
 
         const card = document.createElement("div");
@@ -211,15 +213,22 @@
         return card;
       }
 
-      function calculateDaysRemaining(fechaReactivacion) {
-        if (fechaReactivacion === "indefinido") {
-          return "Indefinido";
-        }
+      function calculateTimeInactive(fechaDesactivacion) {
+        if (!fechaDesactivacion) return "N/A";
         const today = new Date();
-        const reactivationDate = new Date(fechaReactivacion);
-        const timeDiff = reactivationDate.getTime() - today.getTime();
-        const daysRemaining = Math.ceil(timeDiff / (1000 * 3600 * 24));
-        return daysRemaining > 0 ? daysRemaining : 0;
+        const deactivationDate = new Date(fechaDesactivacion);
+        const timeDiff = today.getTime() - deactivationDate.getTime();
+        const daysDiff = Math.floor(timeDiff / (1000 * 3600 * 24));
+
+        if (daysDiff < 30) {
+          return `${daysDiff} día${daysDiff !== 1 ? "s" : ""}`;
+        } else if (daysDiff < 365) {
+          const months = Math.floor(daysDiff / 30);
+          return `${months} mes${months !== 1 ? "es" : ""}`;
+        } else {
+          const years = Math.floor(daysDiff / 365);
+          return `${years} año${years !== 1 ? "s" : ""}`;
+        }
       }
 
       function createClanStatusCard(member) {
@@ -227,14 +236,14 @@
           activo: "bg-green-500",
           pendiente: "bg-yellow-500",
           baneado: "bg-red-500",
-          inhabilitado: "bg-onac-orange",
+          inactivo: "bg-gray-500",
         };
 
         const statusIcons = {
           activo: "fa-check-circle",
           pendiente: "fa-clock",
           baneado: "fa-ban",
-          inhabilitado: "fa-exclamation-triangle",
+          inactivo: "fa-power-off",
         };
 
         const card = document.createElement("div");
@@ -275,23 +284,12 @@
                             : ""
                         }
                         ${
-                          member.fechaReactivacion
+                          member.fechaDesactivacion
                             ? `
-                            <p class="text-sm text-green-300">
-                                Fecha de reactivación: ${
-                                  member.fechaReactivacion === "indefinido"
-                                    ? "Indefinido"
-                                    : new Date(
-                                        member.fechaReactivacion
-                                      ).toLocaleDateString()
-                                }
-                                ${
-                                  member.fechaReactivacion !== "indefinido"
-                                    ? `(${calculateDaysRemaining(
-                                        member.fechaReactivacion
-                                      )} días restantes)`
-                                    : ""
-                                }
+                            <p class="text-sm text-red-300">
+                                Inactivo desde hace: ${calculateTimeInactive(
+                                  member.fechaDesactivacion
+                                )}
                             </p>
                         `
                             : ""
@@ -314,49 +312,39 @@
         const members = await fetchMembers();
         console.log("Miembros obtenidos:", members);
         const clanSummaryContainer = document.getElementById("clanSummary");
-        const activeClanContainer = document.getElementById("activeClanStatus");
-        const pendingClanContainer =
-          document.getElementById("pendingClanStatus");
-        const disabledClanContainer =
-          document.getElementById("disabledClanStatus");
-        const bannedClanContainer = document.getElementById("bannedClanStatus");
+        const javaClansContainer = document.getElementById("javaClans");
+        const bedrockClansContainer = document.getElementById("bedrockClans");
+        const inactiveClanContainer = document.getElementById("inactiveClans");
 
         if (
           !clanSummaryContainer ||
-          !activeClanContainer ||
-          !pendingClanContainer ||
-          !disabledClanContainer ||
-          !bannedClanContainer
+          !javaClansContainer ||
+          !bedrockClansContainer ||
+          !inactiveClanContainer
         ) {
           console.error("No se encontraron los contenedores necesarios");
           return;
         }
 
         clanSummaryContainer.innerHTML = "";
-        activeClanContainer.innerHTML = "";
-        pendingClanContainer.innerHTML = "";
-        disabledClanContainer.innerHTML = "";
-        bannedClanContainer.innerHTML = "";
+        javaClansContainer.innerHTML = "";
+        bedrockClansContainer.innerHTML = "";
+        inactiveClanContainer.innerHTML = "";
 
-        const statuses = ["activo", "pendiente", "baneado", "inhabilitado"];
+        const statuses = ["activo", "pendiente", "baneado", "inactivo"];
         const statusCounts = {};
+        let totalBalance = 0;
 
         members.forEach((member) => {
           statusCounts[member.status] = (statusCounts[member.status] || 0) + 1;
+          totalBalance += member.aportacion;
           const card = createClanStatusCard(member);
-          switch (member.status) {
-            case "activo":
-              activeClanContainer.appendChild(card);
-              break;
-            case "pendiente":
-              pendingClanContainer.appendChild(card);
-              break;
-            case "inhabilitado":
-              disabledClanContainer.appendChild(card);
-              break;
-            case "baneado":
-              bannedClanContainer.appendChild(card);
-              break;
+          if (member.status === "inactivo") {
+            inactiveClanContainer.appendChild(card);
+          } else if (member.platform === "java") {
+            javaClansContainer.appendChild(card);
+          } else if (member.platform === "bedrock") {
+            bedrockClansContainer.appendChild(card);
           }
         });
 
@@ -373,16 +361,20 @@
         document.getElementById(
           "lastUpdate"
         ).innerHTML = `<i class="fas fa-sync-alt mr-2"></i>Última actualización: ${new Date().toLocaleString()}`;
+        document.getElementById(
+          "totalBalance"
+        ).innerHTML = `Balance Total: $${formatBalance(totalBalance)}`;
       }
 
       async function sendWebhook() {
         const members = await fetchMembers();
-        const activos = members.filter((m) => m.status === "activo");
-        const pendientes = members.filter((m) => m.status === "pendiente");
-        const baneados = members.filter((m) => m.status === "baneado");
-        const inhabilitados = members.filter(
-          (m) => m.status === "inhabilitado"
+        const javaClans = members.filter(
+          (m) => m.platform === "java" && m.status !== "inactivo"
         );
+        const bedrockClans = members.filter(
+          (m) => m.platform === "bedrock" && m.status !== "inactivo"
+        );
+        const inactiveClans = members.filter((m) => m.status === "inactivo");
 
         const message = {
           content: "📊 Estado actual de los clanes ONAC:",
@@ -392,57 +384,41 @@
               color: 3447003,
               fields: [
                 {
-                  name: "✅ Clanes Activos",
-                  value: `Total: ${activos.length}\n${activos
+                  name: "☕ Clanes Java",
+                  value: `Total: ${javaClans.length}\n${javaClans
                     .map(
                       (m) =>
-                        `• ${m.name}${
-                          m.nuevo ? " 🆕" : ""
-                        } (Aportación: $${formatBalance(m.aportacion)})`
-                    )
-                    .join("\n")}`,
-                  inline: false,
-                },
-                {
-                  name: "⏳ Clanes Pendientes",
-                  value: `Total: ${pendientes.length}\n${pendientes
-                    .map(
-                      (m) =>
-                        `• ${m.name}${
-                          m.nuevo ? " 🆕" : ""
-                        } (Aportación: $${formatBalance(m.aportacion)})`
-                    )
-                    .join("\n")}`,
-                  inline: false,
-                },
-                {
-                  name: "🚫 Clanes Baneados",
-                  value: `Total: ${baneados.length}\n${baneados
-                    .map(
-                      (m) =>
-                        `• ${m.name}${m.nuevo ? " 🆕" : ""} (Motivo: ${
-                          m.motivo
+                        `• ${m.name}${m.nuevo ? " 🆕" : ""} (Status: ${
+                          m.status
                         }, Aportación: $${formatBalance(m.aportacion)})`
                     )
                     .join("\n")}`,
                   inline: false,
                 },
                 {
-                  name: "⚠️ Clanes Inhabilitados",
-                  value: `Total: ${inhabilitados.length}\n${inhabilitados
+                  name: "📱 Clanes Bedrock",
+                  value: `Total: ${bedrockClans.length}\n${bedrockClans
+                    .map(
+                      (m) =>
+                        `• ${m.name}${m.nuevo ? " 🆕" : ""} (Status: ${
+                          m.status
+                        }, Aportación: $${formatBalance(m.aportacion)})`
+                    )
+                    .join("\n")}`,
+                  inline: false,
+                },
+                {
+                  name: "⚪ Clanes Inactivos",
+                  value: `Total: ${inactiveClans.length}\n${inactiveClans
                     .map((m) => {
-                      const daysRemaining = calculateDaysRemaining(
-                        m.fechaReactivacion
+                      const timeInactive = calculateTimeInactive(
+                        m.fechaDesactivacion
                       );
-                      return `• ${m.name}${m.nuevo ? " 🆕" : ""} (Motivo: ${
-                        m.motivo
-                      }, Reactivación: ${
-                        m.fechaReactivacion === "indefinido"
-                          ? "Indefinido"
-                          : `${new Date(
-                              m.fechaReactivacion
-                            ).toLocaleDateString()} (${daysRemaining} días restantes)`
-                      }, Aportación: $${formatBalance(m.aportacion)})`;
+                      return `• ${m.name}${
+                        m.nuevo ? " 🆕" : ""
+                      } (Inactivo desde hace: ${timeInactive}, Aportación: $${formatBalance(
+                        m.aportacion
+                      )})`;
                     })
                     .join("\n")}`,
                   inline: false,
