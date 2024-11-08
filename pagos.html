@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Pago Mensual NauticMC</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#4fc3f7',
+                        'secondary': '#1e293b',
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'sans-serif'],
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        .loader {
+            border-top-color: #4fc3f7;
+            -webkit-animation: spinner 1.5s linear infinite;
+            animation: spinner 1.5s linear infinite;
+        }
+        @-webkit-keyframes spinner {
+            0% { -webkit-transform: rotate(0deg); }
+            100% { -webkit-transform: rotate(360deg); }
+        }
+        @keyframes spinner {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="bg-secondary text-gray-100 min-h-screen flex flex-col font-sans">
+    <header class="bg-gray-800 text-white py-6 sticky top-0 z-10 shadow-lg">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center">
+                <h1 class="text-3xl font-bold text-onac-blue">ONAC</h1>
+                <nav>
+                    <ul class="flex space-x-6">
+                        <li>
+                            <a href="index.html"
+                                class="hover:text-onac-blue transition-colors duration-200 text-lg">Inicio</a>
+                        </li>
+                        <li>
+                            <a href="members.html" class="hover:text-onac-blue transition-colors duration-200 text-lg">Miembros</a>
+                        </li>
+                        <li>
+                            <a href="balance.html"
+                                class="hover:text-onac-blue font-semibold transition-colors duration-200 text-lg">Balance</a>
+                        </li>
+                        <a href="#"
+                        class="hover:text-onac-blue font-semibold transition-colors duration-200 text-lg">Pagos</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow container mx-auto px-4 py-12">
+        <div class="max-w-lg mx-auto bg-gray-700 rounded-xl shadow-2xl p-8">
+            <h2 class="text-3xl font-semibold mb-6 text-primary">Selecciona tu rango</h2>
+            <select id="rangoSelect" class="w-full p-3 mb-6 bg-gray-600 rounded-lg text-white text-lg focus:ring-2 focus:ring-primary focus:outline-none">
+                <option value="sin_rango">Sin rango</option>
+                <option value="AQUAN">AQUAN</option>
+                <option value="MEDUSA">MEDUSA</option>
+                <option value="NESSY">NESSY</option>
+                <option value="VULCAN">VULCAN</option>
+                <option value="POSEIDON">POSEIDON</option>
+            </select>
+            <div id="resultado" class="text-3xl font-bold text-primary mb-6 hidden"></div>
+            <div id="loader" class="loader border-4 border-gray-300 rounded-full w-12 h-12 mb-6 mx-auto hidden"></div>
+            <button id="calcular" class="w-full bg-primary text-white py-3 px-6 rounded-lg text-xl font-semibold hover:bg-blue-600 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
+                Calcular Pago
+            </button>
+            <p class="mt-6 text-gray-300 text-center">
+                El pago mensual mostrado representa el 5% de las recompensas obtenidas con el comando /rewards en NauticMC.
+            </p>
+        </div>
+    </main>
+
+    <footer class="bg-gray-800 text-gray-400 py-6 mt-auto">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2024 ONAC - Organización de NauticMC para la Ayuda y el Crecimiento</p>
+        </div>
+    </footer>
+
+    <script>
+        const rangos = {
+            sin_rango: 11625,
+            AQUAN: 14625,
+            MEDUSA: 20625,
+            NESSY: 32625,
+            VULCAN: 56625,
+            POSEIDON: 104625
+        };
+
+        document.getElementById('calcular').addEventListener('click', function() {
+            const resultado = document.getElementById('resultado');
+            const loader = document.getElementById('loader');
+            
+            resultado.classList.add('hidden');
+            loader.classList.remove('hidden');
+
+            setTimeout(() => {
+                const rango = document.getElementById('rangoSelect').value;
+                const pago = rangos[rango];
+                resultado.textContent = `Pago mensual: $${pago.toLocaleString()}`;
+                loader.classList.add('hidden');
+                resultado.classList.remove('hidden');
+            }, 3000);
+        });
+    </script>
+</body>
+</html>
