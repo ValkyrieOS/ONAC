@@ -1,0 +1,106 @@
+{
+  "members": [
+    {
+      "name": "VKTEAM",
+      "role": "Fundador",
+      "image": "img/vkteam.png",
+      "status": "activo",
+      "aportacion": 5758000,
+      "platform": "java"
+    },
+    {
+      "name": "KDS",
+      "role": "Miembro",
+      "image": "img/kds.webp",
+      "status": "activo",
+      "aportacion": 0,
+      "platform": "java"
+    },
+    {
+      "name": "Avengers",
+      "role": "Miembro",
+      "image": "img/avengers.webp",
+      "status": "inactivo",
+      "aportacion": 0,
+      "platform": "java"
+    },
+    {
+      "name": "NauticWarriors",
+      "role": "Miembro",
+      "image": "img/nauticwarriors.webp",
+      "status": "activo",
+      "aportacion": 0,
+      "platform": "bedrock"
+    },
+    {
+      "name": "Kord-Ko",
+      "role": "Miembro",
+      "image": "img/kordko.webp",
+      "status": "inactivo",
+      "aportacion": 0,
+      "platform": "java"
+    },
+    {
+      "name": "NightZ",
+      "role": "Miembro",
+      "image": "img/nightz.webp",
+      "status": "inactivo",
+      "aportacion": 0,
+      "platform": "java"
+    },
+    {
+      "name": "Veleta",
+      "role": "Miembro",
+      "image": "img/veleta.webp",
+      "status": "inactivo",
+      "aportacion": 0,
+      "fechaDesactivacion": "2024-11-08",
+      "platform": "java"
+    },
+    {
+      "name": "Picantes",
+      "role": "Baneado",
+      "image": "img/picantes.webp",
+      "status": "baneado",
+      "motivo": "Staff estafadores",
+      "aportacion": 0,
+      "platform": "java"
+    },
+    {
+      "name": "WNTD",
+      "role": "Miembro",
+      "image": "img/wntd.webp",
+      "status": "activo",
+      "aportacion": 0,
+      "nuevo": true,
+      "platform": "java"
+    },
+    {
+      "name": "tempestad",
+      "role": "Miembro",
+      "image": "img/tempestad.webp",
+      "status": "activo",
+      "aportacion": 0,
+      "nuevo": true,
+      "platform": "java"
+    },
+    {
+      "name": "Real-Minty",
+      "role": "Baneado",
+      "image": "img/realminty.webp",
+      "status": "baneado",
+      "motivo": "Staff estafadores",
+      "aportacion": 0,
+      "platform": "bedrock"
+    },
+    {
+      "name": "Illuminati Bedrock",
+      "role": "Miembro",
+      "image": "img/illuminatibedrock.gif",
+      "status": "activo",
+      "aportacion": 0,
+      "nuevo": true,
+      "platform": "bedrock"
+    }
+  ]
+}

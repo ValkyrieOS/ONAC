@@ -1,106 +1,36 @@
 {
   "members": [
     {
-      "name": "VKTEAM",
-      "role": "Fundador",
-      "image": "img/vkteam.png",
-      "status": "activo",
-      "aportacion": 5758000,
-      "platform": "java"
+      "name": "Glazzier",
+      "clan": "ONAC",
+      "rank": "OWNER",
+      "image": "https://cdn.discordapp.com/avatars/631907198930386950/8f3f1fc85eee5ed5f3067c90ac41adef.webp?size=4096",
+      "platform": "java",
+      "isOwner": true
     },
     {
-      "name": "KDS",
-      "role": "Miembro",
-      "image": "img/kds.webp",
-      "status": "activo",
-      "aportacion": 0,
-      "platform": "java"
+      "name": "Matiprogamer91",
+      "clan": "ONAC",
+      "rank": "OWNER",
+      "image": "https://cdn.discordapp.com/avatars/1259949577121829030/41c7c866743b28aed2d4f965660350ad.webp?size=4096",
+      "platform": "bedrock",
+      "isOwner": true
     },
     {
-      "name": "Avengers",
-      "role": "Miembro",
-      "image": "img/avengers.webp",
-      "status": "inactivo",
-      "aportacion": 0,
-      "platform": "java"
+      "name": "MaXx",
+      "clan": "ANFIBIOS",
+      "rank": "Líder",
+      "image": "https://cdn.discordapp.com/avatars/1238560877175771253/db2b2d984f630d7acafe60f3f541c601.webp?size=4096",
+      "platform": "bedrock",
+      "isOwner": false
     },
     {
-      "name": "NauticWarriors",
-      "role": "Miembro",
-      "image": "img/nauticwarriors.webp",
-      "status": "activo",
-      "aportacion": 0,
-      "platform": "bedrock"
-    },
-    {
-      "name": "Kord-Ko",
-      "role": "Miembro",
-      "image": "img/kordko.webp",
-      "status": "inactivo",
-      "aportacion": 0,
-      "platform": "java"
-    },
-    {
-      "name": "NightZ",
-      "role": "Miembro",
-      "image": "img/nightz.webp",
-      "status": "inactivo",
-      "aportacion": 0,
-      "platform": "java"
-    },
-    {
-      "name": "Veleta",
-      "role": "Miembro",
-      "image": "img/veleta.webp",
-      "status": "inactivo",
-      "aportacion": 0,
-      "fechaDesactivacion": "2024-11-08",
-      "platform": "java"
-    },
-    {
-      "name": "Picantes",
-      "role": "Baneado",
-      "image": "img/picantes.webp",
-      "status": "baneado",
-      "motivo": "Staff estafadores",
-      "aportacion": 0,
-      "platform": "java"
-    },
-    {
-      "name": "WNTD",
-      "role": "Miembro",
-      "image": "img/wntd.webp",
-      "status": "activo",
-      "aportacion": 0,
-      "nuevo": true,
-      "platform": "java"
-    },
-    {
-      "name": "tempestad",
-      "role": "Miembro",
-      "image": "img/tempestad.webp",
-      "status": "activo",
-      "aportacion": 0,
-      "nuevo": true,
-      "platform": "java"
-    },
-    {
-      "name": "Real-Minty",
-      "role": "Baneado",
-      "image": "img/realminty.webp",
-      "status": "baneado",
-      "motivo": "Staff estafadores",
-      "aportacion": 0,
-      "platform": "bedrock"
-    },
-    {
-      "name": "Illuminati Bedrock",
-      "role": "Miembro",
-      "image": "img/illuminatibedrock.gif",
-      "status": "activo",
-      "aportacion": 0,
-      "nuevo": true,
-      "platform": "bedrock"
-    }
+        "name": "MrMartin",
+        "clan": "ANFIBIOS",
+        "rank": "Líder",
+        "image": "https://cdn.discordapp.com/avatars/806528148304429056/1888ddac9dd479d72423ce8bdf128c03.webp?size=4096",
+        "platform": "bedrock",
+        "isOwner": false
+      }
   ]
 }
