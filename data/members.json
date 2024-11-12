@@ -31,6 +31,30 @@
         "image": "https://cdn.discordapp.com/avatars/806528148304429056/1888ddac9dd479d72423ce8bdf128c03.webp?size=4096",
         "platform": "bedrock",
         "isOwner": false
+      },
+      {
+        "name": "Spartacus",
+        "clan": "Illuminati bedrock",
+        "rank": "Líder",
+        "image": "https://cdn.discordapp.com/avatars/1273669598163636266/e4fa8ed0a17b1974c0c7804b9629733e.webp?size=1024&width=640&height=640",
+        "platform": "bedrock",
+        "isOwner": false
+      },
+      {
+        "name": "Josue",
+        "clan": "N/A",
+        "rank": "Miembro",
+        "image": "https://cdn.discordapp.com/avatars/1156415492643360838/45af816d733b5d273db94d0a77d8f3cd.webp?size=1024&width=640&height=640",
+        "platform": "java",
+        "isOwner": false
+      },
+      {
+        "name": "Stanley",
+        "clan": "KDS",
+        "rank": "Líder",
+        "image": "https://cdn.discordapp.com/avatars/933117949248700417/82b9f756cb8e2b6a2bf2250ae8f38e98.webp?size=1024&width=640&height=640",
+        "platform": "bedrock",
+        "isOwner": false
       }
   ]
 }

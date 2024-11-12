@@ -11,28 +11,167 @@
     />
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
+
+      :root {
+        --onac-blue: #3b82f6;
+        --onac-dark: #1e293b;
+        --onac-light: #f3f4f6;
+        --onac-orange: #d97706;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(135deg, var(--onac-dark), #0f172a);
+        color: var(--onac-light);
+      }
+
+      .card {
+        position: relative;
+        overflow: hidden;
+        border-radius: 0.75rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .card:hover {
+        transform: translateY(-5px) scale(1.02);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+      }
+
+      .card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--rank-color),
+          transparent
+        );
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .card:hover::before {
+        opacity: 1;
+      }
+
+      .card-content {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 1rem;
+        background: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(8px);
+        transform: translateY(100%);
+        transition: transform 0.3s ease;
+      }
+
+      .card:hover .card-content {
+        transform: translateY(0);
+      }
+
+      .owner-card {
+        --rank-color: #dc2626;
+      }
+      .developer-card {
+        --rank-color: #8b5cf6;
+      }
+      .lider-card {
+        --rank-color: #eab308;
+      }
+      .usuario-card {
+        --rank-color: #22c55e;
+      }
+
+      .platform-icon {
+        position: absolute;
+        top: 0.75rem;
+        right: 0.75rem;
+        background: rgba(0, 0, 0, 0.6);
+        border-radius: 50%;
+        padding: 0.5rem;
+        transition: all 0.3s ease;
+      }
+
+      .card:hover .platform-icon {
+        transform: scale(1.1);
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .fade-in-up {
+        animation: fadeInUp 0.5s ease forwards;
+      }
+
+      .search-input {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        transition: all 0.3s ease;
+      }
+
+      .search-input:focus {
+        background: rgba(255, 255, 255, 0.2);
+        border-color: var(--onac-blue);
+      }
+
+      .filter-button {
+        transition: all 0.3s ease;
+      }
+
+      .filter-button:hover,
+      .filter-button.active {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .member-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 2rem;
+      }
+
+      .rank-badge {
+        position: absolute;
+        top: 0.75rem;
+        left: 0.75rem;
+        padding: 0.25rem 0.5rem;
+        border-radius: 9999px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        opacity: 0.9;
+      }
+
+      .owner-card .rank-badge {
+        background-color: #dc2626;
+      }
+      .developer-card .rank-badge {
+        background-color: #8b5cf6;
+      }
+      .lider-card .rank-badge {
+        background-color: #eab308;
+      }
+      .usuario-card .rank-badge {
+        background-color: #22c55e;
+      }
     </style>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            fontFamily: {
-              sans: ["Poppins", "sans-serif"],
-            },
-            colors: {
-              "onac-blue": "#3B82F6",
-              "onac-dark": "#1E293B",
-              "onac-light": "#F3F4F6",
-              "onac-orange": "#D97706",
-            },
-          },
-        },
-      };
-    </script>
   </head>
-  <body
-    class="bg-gradient-to-br from-gray-900 to-onac-dark text-onac-light min-h-screen flex flex-col font-sans"
-  >
+
+  <body class="min-h-screen flex flex-col">
     <header class="bg-gray-800 text-white py-6 sticky top-0 z-10 shadow-lg">
       <div class="container mx-auto px-4">
         <div class="flex justify-between items-center">
@@ -70,7 +209,7 @@
               <li>
                 <a
                   href="#"
-                  class="hover:text-onac-blue transition-colors duration-200 text-lg"
+                  class="text-onac-blue font-semibold transition-colors duration-200 text-lg"
                   >Miembros</a
                 >
               </li>
@@ -80,52 +219,62 @@
       </div>
     </header>
 
-    <main class="flex-grow container mx-auto px-4 py-6 md:py-8">
-      <h2 class="text-2xl md:text-3xl font-semibold mb-6 text-onac-blue">
+    <main class="flex-grow container mx-auto px-4 py-8">
+      <h2
+        class="text-4xl font-bold mb-8 text-center text-onac-blue fade-in-up"
+        style="animation-delay: 0.2s"
+      >
         Miembros ONAC
       </h2>
       <div
-        class="mb-6 flex flex-col md:flex-row justify-between items-start md:items-center space-y-4 md:space-y-0"
+        class="mb-8 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0 fade-in-up"
+        style="animation-delay: 0.4s"
       >
-        <div class="flex flex-wrap gap-2 md:gap-4">
+        <div class="flex flex-wrap justify-center gap-2 md:gap-4">
           <button
             id="filterAll"
-            class="px-3 py-1 md:px-4 md:py-2 bg-onac-blue text-white rounded hover:bg-blue-600 transition-colors text-sm md:text-base"
+            class="filter-button px-6 py-2 bg-onac-blue text-white rounded-full hover:bg-blue-600 transition-all duration-300 text-sm md:text-base active"
           >
             Todos
           </button>
           <button
             id="filterJava"
-            class="px-3 py-1 md:px-4 md:py-2 bg-gray-700 text-white rounded hover:bg-gray-600 transition-colors text-sm md:text-base"
+            class="filter-button px-6 py-2 bg-gray-700 text-white rounded-full hover:bg-gray-600 transition-all duration-300 text-sm md:text-base"
           >
             Java
           </button>
           <button
             id="filterBedrock"
-            class="px-3 py-1 md:px-4 md:py-2 bg-gray-700 text-white rounded hover:bg-gray-600 transition-colors text-sm md:text-base"
+            class="filter-button px-6 py-2 bg-gray-700 text-white rounded-full hover:bg-gray-600 transition-all duration-300 text-sm md:text-base"
           >
             Bedrock
           </button>
         </div>
-        <input
-          type="text"
-          id="searchInput"
-          placeholder="Buscar miembros..."
-          class="w-full md:w-auto px-3 py-1 md:px-4 md:py-2 bg-gray-700 text-white rounded focus:outline-none focus:ring-2 focus:ring-onac-blue text-sm md:text-base"
-        />
+        <div class="relative w-full md:w-64">
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="Buscar miembros..."
+            class="search-input w-full px-4 py-2 pl-10 rounded-full focus:outline-none focus:ring-2 focus:ring-onac-blue text-sm md:text-base"
+          />
+          <i
+            class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+          ></i>
+        </div>
       </div>
       <div
         id="membersList"
-        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6"
+        class="member-list fade-in-up"
+        style="animation-delay: 0.6s"
       >
         <!-- Los miembros se insertarán aquí -->
       </div>
     </main>
 
     <footer
-      class="bg-gray-800 bg-opacity-50 backdrop-filter backdrop-blur-lg text-center py-4 border-t border-gray-700"
+      class="bg-gray-800 bg-opacity-50 backdrop-filter backdrop-blur-lg text-center py-6 mt-8 border-t border-gray-700"
     >
-      <p class="text-xs md:text-sm text-gray-400">
+      <p class="text-sm text-gray-400">
         © 2024 ONAC - Organización de NauticMC para la Ayuda y el Crecimiento
       </p>
     </footer>
@@ -145,66 +294,46 @@
         }
       }
 
-      function createMemberCard(member) {
+      function createMemberCard(member, index) {
         const card = document.createElement("div");
-        card.className =
-          "bg-gray-800 rounded-lg overflow-hidden shadow-lg transform transition-all duration-300 hover:scale-105";
-
-        const rankColors = {
-          OWNER: "bg-red-500",
-          Líder: "bg-yellow-500",
-          Miembro: "bg-green-500",
-        };
+        card.className = `card ${member.rank.toLowerCase()}-card`;
+        card.style.animationDelay = `${index * 0.1}s`;
 
         const platformIcon =
           member.platform === "java" ? "fa-brands fa-java" : "fa-solid fa-cube";
         const ownerIcon = member.isOwner
-          ? `<i class="fas fa-crown text-yellow-500 ml-2" aria-label="Propietario"></i>`
+          ? `<i class="fas fa-crown text-yellow-300 ml-2" aria-label="Propietario"></i>`
           : "";
 
         card.innerHTML = `
-                <div class="relative">
-                    <img src="${member.image}" alt="${
+        <img src="${member.image}" alt="${
           member.name
-        }" class="w-full h-40 object-cover">
-                    <div class="absolute top-2 right-2 bg-gray-900 bg-opacity-75 p-2 rounded-full">
-                        <i class="${platformIcon} text-lg ${
+        }" class="w-full h-72 object-cover">
+        <div class="platform-icon">
+          <i class="${platformIcon} text-lg ${
           member.platform === "java" ? "text-orange-400" : "text-blue-400"
         }" aria-label="Plataforma: ${member.platform}"></i>
-                    </div>
-                </div>
-                <div class="p-4">
-                    <div class="flex justify-between items-start mb-2">
-                        <div>
-                            <h3 class="text-lg font-bold truncate">${
-                              member.name
-                            }</h3>
-                            <p class="text-xs text-gray-400 truncate">${
-                              member.clan
-                            }</p>
-                        </div>
-                        <span class="inline-block px-2 py-1 text-xs font-semibold rounded-full ${
-                          rankColors[member.rank] || "bg-gray-700"
-                        } text-white" aria-label="Rango: ${member.rank}">${
-          member.rank
-        }</span>
-                    </div>
-                    <div class="flex items-center justify-between text-sm">
-                        <p class="text-gray-400">
-                            ${
-                              member.platform.charAt(0).toUpperCase() +
-                              member.platform.slice(1)
-                            }
-                        </p>
-                        ${ownerIcon}
-                    </div>
-                </div>
-            `;
+        </div>
+        <span class="rank-badge">${member.rank}</span>
+        <div class="card-content">
+          <h3 class="text-lg font-bold truncate">${
+            member.name
+          } ${ownerIcon}</h3>
+          <p class="text-sm truncate text-gray-300">${member.clan}</p>
+        </div>
+      `;
 
         return card;
       }
 
       let allMembers = [];
+
+      function sortMembers(members) {
+        const rankOrder = ["Owner", "Developer", "Líder", "Usuario"];
+        return members.sort((a, b) => {
+          return rankOrder.indexOf(a.rank) - rankOrder.indexOf(b.rank);
+        });
+      }
 
       async function displayMembers(filter = "all") {
         const membersListContainer = document.getElementById("membersList");
@@ -216,27 +345,31 @@
 
         membersListContainer.innerHTML = "";
 
-        const filteredMembers = allMembers.filter((member) => {
+        let filteredMembers = allMembers.filter((member) => {
           if (filter === "all") return true;
           return member.platform === filter;
         });
 
-        filteredMembers.forEach((member) => {
-          const card = createMemberCard(member);
+        filteredMembers = sortMembers(filteredMembers);
+
+        filteredMembers.forEach((member, index) => {
+          const card = createMemberCard(member, index);
           membersListContainer.appendChild(card);
         });
       }
 
       function setupEventListeners() {
-        document
-          .getElementById("filterAll")
-          .addEventListener("click", () => displayMembers("all"));
-        document
-          .getElementById("filterJava")
-          .addEventListener("click", () => displayMembers("java"));
-        document
-          .getElementById("filterBedrock")
-          .addEventListener("click", () => displayMembers("bedrock"));
+        const filterButtons = document.querySelectorAll(".filter-button");
+        filterButtons.forEach((button) => {
+          button.addEventListener("click", function () {
+            filterButtons.forEach((btn) =>
+              btn.classList.remove("active", "bg-onac-blue")
+            );
+            this.classList.add("active", "bg-onac-blue");
+            const filter = this.id.replace("filter", "").toLowerCase();
+            displayMembers(filter);
+          });
+        });
 
         const searchInput = document.getElementById("searchInput");
         searchInput.addEventListener("input", () => {
@@ -253,8 +386,9 @@
       function displayFilteredMembers(members) {
         const membersListContainer = document.getElementById("membersList");
         membersListContainer.innerHTML = "";
-        members.forEach((member) => {
-          const card = createMemberCard(member);
+        const sortedMembers = sortMembers(members);
+        sortedMembers.forEach((member, index) => {
+          const card = createMemberCard(member, index);
           membersListContainer.appendChild(card);
         });
       }
