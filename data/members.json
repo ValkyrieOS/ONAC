@@ -43,7 +43,7 @@
       {
         "name": "Josue",
         "clan": "N/A",
-        "rank": "Miembro",
+        "rank": "Usuario",
         "image": "https://cdn.discordapp.com/avatars/1156415492643360838/45af816d733b5d273db94d0a77d8f3cd.webp?size=1024&width=640&height=640",
         "platform": "java",
         "isOwner": false
@@ -54,6 +54,30 @@
         "rank": "Líder",
         "image": "https://cdn.discordapp.com/avatars/933117949248700417/82b9f756cb8e2b6a2bf2250ae8f38e98.webp?size=1024&width=640&height=640",
         "platform": "bedrock",
+        "isOwner": false
+      },
+      {
+        "name": "Aidensita",
+        "clan": "ONAC",
+        "rank": "Developer",
+        "image": "img/default-image.png",
+        "platform": "java",
+        "isOwner": false
+      },
+      {
+        "name": "HADES",
+        "clan": "Valkyrie",
+        "rank": "Usuario",
+        "image": "https://cdn.discordapp.com/avatars/1018227184957128706/c3013bb6bf9c36711b66e55a3ec34cf1.webp?size=1024",
+        "platform": "java",
+        "isOwner": false
+      },
+      {
+        "name": "gustin",
+        "clan": "N/A",
+        "rank": "Líder",
+        "image": "https://cdn.discordapp.com/avatars/1250504785602412645/4fd0b86360573590f5b36743f3c338bc.webp?size=1024",
+        "platform": "java",
         "isOwner": false
       }
   ]
