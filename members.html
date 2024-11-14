@@ -1,252 +1,298 @@
 <!DOCTYPE html>
 <html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Miembros ONAC</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Miembros ONAC</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
-  <style>
-    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
+      :root {
+        --primary-color: #3b82f6;
+        --secondary-color: #1e40af;
+        --background-color: #0f172a;
+        --card-background: #1e293b;
+        --text-color: #f3f4f6;
+      }
 
-    :root {
-      --primary-color: #3b82f6;
-      --secondary-color: #1e40af;
-      --background-color: #0f172a;
-      --card-background: #1e293b;
-      --text-color: #f3f4f6;
-    }
+      body {
+        font-family: "Poppins", sans-serif;
+        background: var(--background-color);
+        color: var(--text-color);
+      }
 
-    body {
-      font-family: "Poppins", sans-serif;
-      background: var(--background-color);
-      color: var(--text-color);
-    }
+      .card {
+        position: relative;
+        border-radius: 1rem;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        background: var(--card-background);
+      }
 
-    .card {
-      position: relative;
-      border-radius: 1rem;
-      overflow: hidden;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      background: var(--card-background);
-    }
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+      }
 
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
-    }
+      .member-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 2rem;
+      }
 
-    .member-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 2rem;
-    }
+      .member-avatar {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+      }
 
-    .member-avatar {
-      width: 100%;
-      height: 250px;
-      object-fit: cover;
-      transition: transform 0.3s ease;
-    }
+      .card:hover .member-avatar {
+        transform: scale(1.05);
+      }
 
-    .card:hover .member-avatar {
-      transform: scale(1.05);
-    }
+      .member-name {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 1rem;
+        background: rgba(0, 0, 0, 0.7);
+        text-align: center;
+        font-weight: 600;
+        font-size: 1.1rem;
+        transition: background-color 0.3s ease;
+      }
 
-    .member-name {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      padding: 1rem;
-      background: rgba(0, 0, 0, 0.7);
-      text-align: center;
-      font-weight: 600;
-      font-size: 1.1rem;
-      transition: background-color 0.3s ease;
-    }
+      .card:hover .member-name {
+        background: rgba(0, 0, 0, 0.9);
+      }
 
-    .card:hover .member-name {
-      background: rgba(0, 0, 0, 0.9);
-    }
+      .header-nav a {
+        position: relative;
+        transition: color 0.3s ease;
+      }
 
-    .header-nav a {
-      position: relative;
-      transition: color 0.3s ease;
-    }
+      .header-nav a::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        bottom: -5px;
+        left: 0;
+        background-color: var(--primary-color);
+        visibility: hidden;
+        transform: scaleX(0);
+        transition: all 0.3s ease-in-out;
+      }
 
-    .header-nav a::after {
-      content: '';
-      position: absolute;
-      width: 100%;
-      height: 2px;
-      bottom: -5px;
-      left: 0;
-      background-color: var(--primary-color);
-      visibility: hidden;
-      transform: scaleX(0);
-      transition: all 0.3s ease-in-out;
-    }
+      .header-nav a:hover::after {
+        visibility: visible;
+        transform: scaleX(1);
+      }
 
-    .header-nav a:hover::after {
-      visibility: visible;
-      transform: scaleX(1);
-    }
+      .owner-crown {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        font-size: 1.5rem;
+        color: #fbbf24;
+        filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.5));
+      }
 
-    .owner-crown {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      font-size: 1.5rem;
-      color: #fbbf24;
-      filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.5));
-    }
+      .member-count {
+        background-color: var(--secondary-color);
+        border-radius: 9999px;
+        padding: 0.5rem 1rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        display: inline-block;
+      }
 
-    .member-count {
-      background-color: var(--secondary-color);
-      border-radius: 9999px;
-      padding: 0.5rem 1rem;
-      font-weight: 600;
-      margin-bottom: 1rem;
-      display: inline-block;
-    }
+      .owner-section {
+        margin-bottom: 2rem;
+      }
 
-    .owner-section {
-      margin-bottom: 2rem;
-    }
+      .section-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        color: var(--primary-color);
+      }
+    </style>
+  </head>
 
-    .section-title {
-      font-size: 1.5rem;
-      font-weight: 600;
-      margin-bottom: 1rem;
-      color: var(--primary-color);
-    }
-  </style>
-</head>
-
-<body class="min-h-screen">
-  <header class="bg-gray-800 text-white py-6 sticky top-0 z-10 shadow-lg">
-    <div class="container mx-auto px-4">
-      <div class="flex justify-between items-center">
-        <h1 class="text-3xl font-bold text-primary-color">ONAC</h1>
-        <nav class="header-nav">
-          <ul class="flex space-x-6">
-            <li><a href="index.html" class="hover:text-primary-color transition-colors duration-200 text-lg">Inicio</a>
-            </li>
-            <li><a href="clans.html" class="hover:text-primary-color transition-colors duration-200 text-lg">Clanes</a>
-            </li>
-            <li><a href="balance.html"
-                class="hover:text-primary-color transition-colors duration-200 text-lg">Balance</a></li>
-            <li><a href="pagos.html" class="hover:text-primary-color transition-colors duration-200 text-lg">Pagos</a>
-            </li>
-            <li><a href="#"
-                class="hover:text-primary-color transition-colors duration-200 text-lg font-semibold">Miembros</a></li>
-          </ul>
-        </nav>
-      </div>
-    </div>
-  </header>
-
-  <main class="container mx-auto px-4 py-12">
-    <h2 class="text-4xl font-bold mb-8 text-center text-primary-color">Nuestros Miembros</h2>
-    <div class="text-center mb-8">
-      <span id="memberCount" class="member-count"></span>
-    </div>
-    <div class="owner-section">
-      <h3 class="section-title">Propietarios</h3>
-      <div id="ownersList" class="member-list">
-        <!-- Los propietarios se insertarán aquí -->
-      </div>
-    </div>
-    <div class="members-section">
-      <h3 class="section-title">Miembros</h3>
-      <div id="membersList" class="member-list">
-        <!-- Los miembros se insertarán aquí -->
-      </div>
-    </div>
-  </main>
-
-  <footer class="bg-gray-800 text-white py-8 mt-12">
-    <div class="container mx-auto px-4">
-      <div class="flex flex-col md:flex-row justify-between items-center">
-        <p class="mb-4 md:mb-0">&copy; 2023 ONAC. Todos los derechos reservados.</p>
-        <div class="flex space-x-6">
-          <a href="#" class="hover:text-primary-color transition-colors duration-200">
-            <i class="fab fa-discord text-2xl" aria-label="Discord"></i>
-          </a>
-          <a href="#" class="hover:text-primary-color transition-colors duration-200">
-            <i class="fab fa-twitter text-2xl" aria-label="Twitter"></i>
-          </a>
+  <body class="min-h-screen">
+    <header class="bg-gray-800 text-white py-6 sticky top-0 z-10 shadow-lg">
+      <div class="container mx-auto px-4">
+        <div class="flex justify-between items-center">
+          <h1 class="text-3xl font-bold text-primary-color">ONAC</h1>
+          <nav class="header-nav">
+            <ul class="flex space-x-6">
+              <li>
+                <a
+                  href="index.html"
+                  class="hover:text-primary-color transition-colors duration-200 text-lg"
+                  >Inicio</a
+                >
+              </li>
+              <li>
+                <a
+                  href="clans.html"
+                  class="hover:text-primary-color transition-colors duration-200 text-lg"
+                  >Clanes</a
+                >
+              </li>
+              <li>
+                <a
+                  href="balance.html"
+                  class="hover:text-primary-color transition-colors duration-200 text-lg"
+                  >Balance</a
+                >
+              </li>
+              <li>
+                <a
+                  href="pagos.html"
+                  class="hover:text-primary-color transition-colors duration-200 text-lg"
+                  >Pagos</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="hover:text-primary-color transition-colors duration-200 text-lg font-semibold"
+                  >Miembros</a
+                >
+              </li>
+            </ul>
+          </nav>
         </div>
       </div>
-    </div>
-  </footer>
+    </header>
 
-  <script>
-    async function fetchMembers() {
-      try {
-        const response = await fetch("data/members.json");
-        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-        const data = await response.json();
-        return data.users;
-      } catch (error) {
-        console.error("Error al cargar los miembros:", error);
-        return [];
+    <main class="container mx-auto px-4 py-12">
+      <h2 class="text-4xl font-bold mb-8 text-center text-primary-color">
+        Nuestros Miembros
+      </h2>
+      <div class="text-center mb-8">
+        <span id="memberCount" class="member-count"></span>
+      </div>
+      <div class="owner-section">
+        <h3 class="section-title">Propietarios</h3>
+        <div id="ownersList" class="member-list">
+          <!-- Los propietarios se insertarán aquí -->
+        </div>
+      </div>
+      <div class="members-section">
+        <h3 class="section-title">Miembros</h3>
+        <div id="membersList" class="member-list">
+          <!-- Los miembros se insertarán aquí -->
+        </div>
+      </div>
+    </main>
+
+    <footer class="bg-gray-800 text-white py-8 mt-12">
+      <div class="container mx-auto px-4">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+          <p class="mb-4 md:mb-0">
+            &copy; 2023 ONAC. Todos los derechos reservados.
+          </p>
+          <div class="flex space-x-6">
+            <a
+              href="#"
+              class="hover:text-primary-color transition-colors duration-200"
+            >
+              <i class="fab fa-discord text-2xl" aria-label="Discord"></i>
+            </a>
+            <a
+              href="#"
+              class="hover:text-primary-color transition-colors duration-200"
+            >
+              <i class="fab fa-twitter text-2xl" aria-label="Twitter"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      async function fetchMembers() {
+        try {
+          const response = await fetch("data/members.json");
+          if (!response.ok)
+            throw new Error(`HTTP error! status: ${response.status}`);
+          const data = await response.json();
+          return data.users;
+        } catch (error) {
+          console.error("Error al cargar los miembros:", error);
+          return [];
+        }
       }
-    }
 
-    function createMemberCard(member) {
-      const card = document.createElement("div");
-      card.className = `card`;
+      function createMemberCard(member) {
+        const card = document.createElement("div");
+        card.className = `card`;
 
-      const ownerIcon = member.isOwner ? `<i class="fas fa-crown owner-crown" aria-label="Propietario"></i>` : "";
+        const ownerIcon = member.isOwner
+          ? `<i class="fas fa-crown owner-crown" aria-label="Propietario"></i>`
+          : "";
 
-      card.innerHTML = `
-                <img src="${member.avatar_url || 'https://via.placeholder.com/250x250.png?text=No+Avatar'}" 
+        card.innerHTML = `
+                <img src="${
+                  member.avatar_url ||
+                  "https://via.placeholder.com/250x250.png?text=No+Avatar"
+                }" 
                      alt="Avatar de ${member.user}" 
                      class="member-avatar">
                 ${ownerIcon}
                 <div class="member-name">${member.user}</div>
             `;
 
-      return card;
-    }
-
-    async function displayMembers() {
-      const ownersListContainer = document.getElementById("ownersList");
-      const membersListContainer = document.getElementById("membersList");
-      const memberCountElement = document.getElementById("memberCount");
-      if (!ownersListContainer || !membersListContainer || !memberCountElement) {
-        console.error("No se encontró alguno de los contenedores necesarios");
-        return;
+        return card;
       }
 
-      const members = await fetchMembers();
+      async function displayMembers() {
+        const ownersListContainer = document.getElementById("ownersList");
+        const membersListContainer = document.getElementById("membersList");
+        const memberCountElement = document.getElementById("memberCount");
+        if (
+          !ownersListContainer ||
+          !membersListContainer ||
+          !memberCountElement
+        ) {
+          console.error("No se encontró alguno de los contenedores necesarios");
+          return;
+        }
 
-      // Actualizar el contador de miembros
-      memberCountElement.textContent = `Total de Miembros: ${members.length}`;
+        const members = await fetchMembers();
 
-      // Separar propietarios y miembros regulares
-      const owners = members.filter(member => member.isOwner);
-      const regularMembers = members.filter(member => !member.isOwner);
+        // Actualizar el contador de miembros
+        memberCountElement.textContent = `Total de Miembros: ${members.length}`;
 
-      // Mostrar propietarios
-      owners.forEach((owner) => {
-        const card = createMemberCard(owner);
-        ownersListContainer.appendChild(card);
-      });
+        // Separar propietarios y miembros regulares
+        const owners = members.filter((member) => member.isOwner);
+        const regularMembers = members.filter((member) => !member.isOwner);
 
-      // Mostrar miembros regulares
-      regularMembers.forEach((member) => {
-        const card = createMemberCard(member);
-        membersListContainer.appendChild(card);
-      });
-    }
+        // Mostrar propietarios
+        owners.forEach((owner) => {
+          const card = createMemberCard(owner);
+          ownersListContainer.appendChild(card);
+        });
 
-    document.addEventListener("DOMContentLoaded", displayMembers);
-  </script>
-</body>
+        // Mostrar miembros regulares
+        regularMembers.forEach((member) => {
+          const card = createMemberCard(member);
+          membersListContainer.appendChild(card);
+        });
+      }
 
+      document.addEventListener("DOMContentLoaded", displayMembers);
+    </script>
+  </body>
 </html>
