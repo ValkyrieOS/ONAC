@@ -1,86 +1,85 @@
 {
   "users": [
     {
-      "user": "itzdrske",
-      "avatar_url": "https://cdn.discordapp.com/avatars/1302874960423026729/6561064aa5ecd106b10ede357c0c8d2a.png?size=1024"
-    },
-    {
-      "user": "mati030989",
-      "avatar_url": "https://cdn.discordapp.com/avatars/1298348059083800650/0f38da0b080cf76ec3fb648b3c04a8e9.png?size=1024"
-    },
-    {
-      "user": "luckygamer086",
-      "avatar_url": "https://cdn.discordapp.com/avatars/1296888767319117836/ae07d01d7796f2d9961fd149acac5aa1.png?size=1024"
-    },
-    {
-      "user": "sam_levitt",
-      "avatar_url": "https://cdn.discordapp.com/avatars/1288334358515552360/bddbc4e6d9e3b907414ade1a4438460e.png?size=1024"
-    },
-    {
-      "user": "spartacus5823",
-      "avatar_url": "https://cdn.discordapp.com/avatars/1273669598163636266/e4fa8ed0a17b1974c0c7804b9629733e.png?size=1024"
-    },
-    {
-      "user": "kaositoo",
-      "avatar_url": "https://cdn.discordapp.com/avatars/1264895792079175804/e050cba324008e34367070237cfddcbd.png?size=1024"
-    },
-    {
-      "user": "matias.207",
-      "avatar_url": "https://cdn.discordapp.com/avatars/1259949577121829030/41c7c866743b28aed2d4f965660350ad.png?size=1024",
+      "user": "glazzier_",
+      "avatar_url": "https://cdn.discordapp.com/avatars/631907198930386950/8f3f1fc85eee5ed5f3067c90ac41adef.webp?size=1024",
       "isOwner": true
-    },
-    {
-      "user": ".gusinus1_08468.",
-      "avatar_url": "https://cdn.discordapp.com/avatars/1250504785602412645/4fd0b86360573590f5b36743f3c338bc.png?size=1024"
-    },
-    {
-      "user": "itzmartixx",
-      "avatar_url": "https://cdn.discordapp.com/avatars/1238560877175771253/db2b2d984f630d7acafe60f3f541c601.png?size=1024"
-    },
-    {
-      "user": "ibaiaz_pro_94092",
-      "avatar_url": "https://cdn.discordapp.com/avatars/1224032538540900413/1d00c0928867f07cfa1ac2bed0dea261.png?size=1024"
-    },
-    {
-      "user": "aidensita_00",
-      "avatar_url": "img/default-image.png"
-    },
-    {
-      "user": "josue0628",
-      "avatar_url": "https://cdn.discordapp.com/avatars/1156415492643360838/45af816d733b5d273db94d0a77d8f3cd.png?size=1024"
-    },
-    {
-      "user": "elanastasiogg",
-      "avatar_url": "https://cdn.discordapp.com/avatars/1105189339111112834/deebe1cba4672fcb17da3cf587028c4b.png?size=1024"
-    },
-    {
-      "user": "_marketing_10",
-      "avatar_url": "https://cdn.discordapp.com/avatars/1090654335987359786/5b646ca578d1a85075835eff81fa5e1f.png?size=1024"
-    },
-    {
-      "user": "mlkkkkkk",
-      "avatar_url": null
-    },
-    {
-      "user": "alejo911",
-      "avatar_url": "https://cdn.discordapp.com/avatars/1018227184957128706/c3013bb6bf9c36711b66e55a3ec34cf1.png?size=1024"
-    },
-    {
-      "user": "1tzstanley",
-      "avatar_url": "https://cdn.discordapp.com/avatars/933117949248700417/82b9f756cb8e2b6a2bf2250ae8f38e98.png?size=1024"
-    },
-    {
-      "user": "mateobmx_26",
-      "avatar_url": "https://cdn.discordapp.com/avatars/806528148304429056/1888ddac9dd479d72423ce8bdf128c03.png?size=1024"
     },
     {
       "user": ".onenoobs",
       "avatar_url": "https://cdn.discordapp.com/avatars/724403466809901119/a_75e25a262e4cb13ddd00ab6587f1d881.gif?size=1024"
     },
     {
-      "user": "glazzier_",
-      "avatar_url": "https://cdn.discordapp.com/avatars/631907198930386950/8f3f1fc85eee5ed5f3067c90ac41adef.png?size=1024",
-      "isOwner": true
+      "user": "mateobmx_26",
+      "avatar_url": "https://cdn.discordapp.com/avatars/806528148304429056/1888ddac9dd479d72423ce8bdf128c03.webp?size=1024"
+    },
+    {
+      "user": "1tzstanley",
+      "avatar_url": "https://cdn.discordapp.com/avatars/933117949248700417/82b9f756cb8e2b6a2bf2250ae8f38e98.webp?size=1024"
+    },
+    {
+      "user": "alejo911",
+      "avatar_url": "https://cdn.discordapp.com/avatars/1018227184957128706/c3013bb6bf9c36711b66e55a3ec34cf1.webp?size=1024"
+    },
+    {
+      "user": "mlkkkkkk",
+      "avatar_url": "https://cdn.discordapp.com/embed/avatars/2.png"
+    },
+    {
+      "user": "_marketing_10",
+      "avatar_url": "https://cdn.discordapp.com/avatars/1090654335987359786/5b646ca578d1a85075835eff81fa5e1f.webp?size=1024"
+    },
+    {
+      "user": "elanastasiogg",
+      "avatar_url": "https://cdn.discordapp.com/avatars/1105189339111112834/deebe1cba4672fcb17da3cf587028c4b.webp?size=1024"
+    },
+    {
+      "user": "josue0628",
+      "avatar_url": "https://cdn.discordapp.com/avatars/1156415492643360838/45af816d733b5d273db94d0a77d8f3cd.webp?size=1024"
+    },
+    {
+      "user": "gamecommunity",
+      "avatar_url": "https://cdn.discordapp.com/avatars/1183505576584564778/107aecde4740191ae64c5d51b4b5f414.webp?size=1024"
+    },
+    {
+      "user": "aidensita_00",
+      "avatar_url": "https://cdn.discordapp.com/embed/avatars/5.png"
+    },
+    {
+      "user": "itzmartixx",
+      "avatar_url": "https://cdn.discordapp.com/avatars/1238560877175771253/db2b2d984f630d7acafe60f3f541c601.webp?size=1024"
+    },
+    {
+      "user": ".gusinus1_08468.",
+      "avatar_url": "https://cdn.discordapp.com/avatars/1250504785602412645/4fd0b86360573590f5b36743f3c338bc.webp?size=1024"
+    },
+    {
+      "user": "matias.207",
+      "avatar_url": "https://cdn.discordapp.com/avatars/1259949577121829030/41c7c866743b28aed2d4f965660350ad.webp?size=1024"
+    },
+    {
+      "user": "kaositoo",
+      "avatar_url": "https://cdn.discordapp.com/avatars/1264895792079175804/e050cba324008e34367070237cfddcbd.webp?size=1024"
+    },
+    {
+      "user": "spartacus5823",
+      "avatar_url": "https://cdn.discordapp.com/avatars/1273669598163636266/e4fa8ed0a17b1974c0c7804b9629733e.webp?size=1024"
+    },
+    {
+      "user": "sam_levitt",
+      "avatar_url": "https://cdn.discordapp.com/avatars/1288334358515552360/fb9e293d043c59204832c7dfcaaeea7d.webp?size=1024"
+    },
+    {
+      "user": "luckygamer086",
+      "avatar_url": "https://cdn.discordapp.com/avatars/1296888767319117836/ae07d01d7796f2d9961fd149acac5aa1.webp?size=1024"
+    },
+    {
+      "user": "mati030989",
+      "avatar_url": "https://cdn.discordapp.com/avatars/1298348059083800650/0f38da0b080cf76ec3fb648b3c04a8e9.webp?size=1024"
+    },
+    {
+      "user": "itzdrske",
+      "avatar_url": "https://cdn.discordapp.com/avatars/1302874960423026729/6561064aa5ecd106b10ede357c0c8d2a.webp?size=1024"
     }
   ]
 }
