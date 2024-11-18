@@ -1,0 +1,27 @@
+{
+  "integratedBots": [
+    {
+      "name": "Nekotina",
+      "image": "https://cdn.discordapp.com/avatars/429457053791158281/6dfcacd4aaa9f0d8408d1ab76ded3c68.webp?size=4096",
+      "functions": "A fun bot here to keep your server active.",
+      "integrated": true
+    },
+    {
+      "name": "Koya",
+      "image": "https://cdn.discordapp.com/avatars/276060004262477825/cb858fe55d31f9a9b3501eb6a0dc41b2.webp?size=4096",
+      "functions": "A multipurpose Discord app including greetings cards, a One Piece RPG, moderation, social alerts, utilities and more!",
+      "integrated": true
+    },
+    {
+      "name": "Suggester",
+      "image": "https://cdn.discordapp.com/avatars/564426594144354315/a_668ba5f2c2d373c8af6c23684f20d818.gif?size=4096",
+      "functions": "An all-in-one suggestion bot with a plethora of configuration features to let you tailor it to your needs"
+    },
+    {
+      "name": "ProBot",
+      "image": "https://cdn.discordapp.com/avatars/282859044593598464/156a0d2872579f1ffcaa5d2127239bfd.webp?size=4096",
+      "functions": "Configurable bot w/ welcome images, logs, social commands, moderation, self-assignable role, social media notifications & server protection.",
+      "integrated": true
+    }
+  ]
+}
