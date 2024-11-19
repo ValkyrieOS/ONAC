@@ -5,40 +5,71 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculadora de Pago Mensual NauticMC</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap" rel="stylesheet" />
     <script>
         tailwind.config = {
             darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
-                        'primary': '#4fc3f7',
-                        'secondary': '#1e293b',
+                        'onac-blue': '#4fc3f7',
+                        'onac-dark': '#1e293b',
                     },
                     fontFamily: {
-                        'sans': ['Inter', 'sans-serif'],
+                        'onest': ['Onest', 'sans-serif'],
                     },
                 },
             },
         }
     </script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        body {
+            font-family: "Onest", sans-serif;
+            background: #0f172a;
+        }
+
         .loader {
             border-top-color: #4fc3f7;
-            -webkit-animation: spinner 1.5s linear infinite;
-            animation: spinner 1.5s linear infinite;
+            animation: spinner 1s linear infinite;
         }
-        @-webkit-keyframes spinner {
-            0% { -webkit-transform: rotate(0deg); }
-            100% { -webkit-transform: rotate(360deg); }
+
+        .card-glow {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
+
+        .card-glow:hover {
+            box-shadow: 0 0 30px rgba(79, 195, 247, 0.2);
+            transform: translateY(-5px);
+        }
+
         @keyframes spinner {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .select-custom {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%234fc3f7'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+            background-position: right 1rem center;
+            background-repeat: no-repeat;
+            background-size: 1.5em 1.5em;
+        }
+
+        .result-animation {
+            animation: fadeScale 0.3s ease-out;
+        }
+
+        @keyframes fadeScale {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
     </style>
 </head>
-<body class="bg-secondary text-gray-100 min-h-screen flex flex-col font-sans">
+<body class="min-h-screen flex flex-col font-onest">
     <header class="bg-gray-800 text-white py-6 sticky top-0 z-10 shadow-lg">
         <div class="container mx-auto px-4">
             <div class="flex justify-between items-center">
@@ -75,59 +106,164 @@
         </div>
     </header>
 
-    <main class="flex-grow container mx-auto px-4 py-12">
-        <div class="max-w-lg mx-auto bg-gray-700 rounded-xl shadow-2xl p-8">
-            <h2 class="text-3xl font-semibold mb-6 text-primary">Selecciona tu rango</h2>
-            <select id="rangoSelect" class="w-full p-3 mb-6 bg-gray-600 rounded-lg text-white text-lg focus:ring-2 focus:ring-primary focus:outline-none">
-                <option value="sin_rango">Sin rango</option>
-                <option value="AQUAN">AQUAN</option>
-                <option value="MEDUSA">MEDUSA</option>
-                <option value="NESSY">NESSY</option>
-                <option value="VULCAN">VULCAN</option>
-                <option value="POSEIDON">POSEIDON</option>
-            </select>
-            <div id="resultado" class="text-3xl font-bold text-primary mb-6 hidden"></div>
-            <div id="loader" class="loader border-4 border-gray-300 rounded-full w-12 h-12 mb-6 mx-auto hidden"></div>
-            <button id="calcular" class="w-full bg-primary text-white py-3 px-6 rounded-lg text-xl font-semibold hover:bg-blue-600 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
-                Calcular Pago
-            </button>
-            <p class="mt-6 text-gray-300 text-center">
-                El pago mensual mostrado representa el 5% de las recompensas obtenidas con el comando /rewards en NauticMC.
+    <main class="flex-grow container mx-auto px-4 py-16">
+        <div class="text-center mb-12">
+            <h1 class="text-6xl font-black mb-4">
+                <span class="bg-clip-text text-transparent bg-gradient-to-r from-onac-blue via-blue-400 to-onac-blue">
+                    Calculadora de Pagos
+                </span>
+            </h1>
+            <p class="text-xl text-onac-blue/80 max-w-2xl mx-auto leading-relaxed">
+                Calcula el pago mensual basado en tu rango en NauticMC
             </p>
+        </div>
+
+        <div class="max-w-xl mx-auto mb-8">
+            <div class="bg-emerald-900/20 border border-emerald-500/30 rounded-xl p-6 backdrop-blur-sm">
+                <div class="flex items-center justify-center space-x-4">
+                    <div class="flex items-center space-x-2">
+                        <span class="text-2xl font-bold text-emerald-400">5%</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                        </svg>
+                        <span class="text-2xl font-bold text-emerald-400">4.5%</span>
+                    </div>
+                </div>
+                <p class="text-center mt-3 text-emerald-300/90">
+                    El porcentaje de pago mensual ha sido actualizado
+                </p>
+            </div>
+        </div>
+
+        <div class="max-w-xl mx-auto">
+            <div class="bg-gray-800/50 backdrop-blur-sm rounded-2xl shadow-xl p-8 border border-onac-blue/20 card-glow">
+                <div class="flex items-center justify-between mb-8">
+                    <h2 class="text-2xl font-bold text-onac-blue">Selecciona tu rango</h2>
+                    <span class="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                        </svg>
+                        4.5% mensual
+                    </span>
+                </div>
+                
+                <select id="rangoSelect" 
+                        class="w-full p-4 mb-8 bg-gray-700/50 rounded-xl text-white text-lg 
+                               border border-onac-blue/20 select-custom
+                               focus:ring-2 focus:ring-onac-blue focus:border-transparent
+                               transition-colors duration-300 cursor-pointer">
+                    <option value="sin_rango">Sin rango</option>
+                    <option value="AQUAN">AQUAN</option>
+                    <option value="MEDUSA">MEDUSA</option>
+                    <option value="NESSY">NESSY</option>
+                    <option value="VULCAN">VULCAN</option>
+                    <option value="POSEIDON">POSEIDON</option>
+                </select>
+
+                <div id="resultado" 
+                     class="text-4xl font-bold text-center mb-8 hidden result-animation
+                            bg-clip-text text-transparent bg-gradient-to-r 
+                            from-onac-blue to-blue-400"></div>
+
+                <div id="loader" 
+                     class="loader border-4 border-gray-600 rounded-full w-12 h-12 mb-8 mx-auto hidden"></div>
+
+                <button id="calcular" 
+                        class="w-full bg-onac-blue/20 border border-onac-blue/30 backdrop-blur-sm
+                               text-onac-blue py-4 px-6 rounded-xl text-xl font-bold
+                               hover:bg-onac-blue hover:text-white
+                               transition-all duration-300 transform hover:scale-[1.02]
+                               focus:outline-none focus:ring-2 focus:ring-onac-blue/50
+                               active:scale-95">
+                    Calcular Pago
+                </button>
+
+                <div class="mt-6 space-y-3">
+                    <div class="bg-gray-700/30 rounded-lg p-4 border border-gray-600/30">
+                        <h3 class="text-emerald-400 font-semibold mb-2">Información de Pagos</h3>
+                        <ul class="space-y-2 text-sm text-gray-300">
+                            <li class="flex items-center space-x-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                <span>Pagos basados en las recompensas de /rewards</span>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                <span>Pagos realizados el día 1 de cada mes</span>
+                            </li>
+                            <li class="flex items-center space-x-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                <span>Nuevo porcentaje: 4.5% de las recompensas</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
 
-    <footer class="bg-gray-800 text-gray-400 py-6 mt-auto">
+    <footer class="bg-gray-800/80 backdrop-blur-sm text-gray-400 py-6 mt-auto border-t border-gray-700/50">
         <div class="container mx-auto px-4 text-center">
-            <p>&copy; 2024 ONAC - Organización de NauticMC para la Ayuda y el Crecimiento</p>
+            <p class="text-sm">
+                &copy; 2024 ONAC - Organización de NauticMC para la Ayuda y el Crecimiento
+            </p>
         </div>
     </footer>
 
     <script>
-        const rangos = {
-            sin_rango: 11625,
-            AQUAN: 14625,
-            MEDUSA: 20625,
-            NESSY: 32625,
-            VULCAN: 56625,
-            POSEIDON: 104625
+        // Calculamos los valores con 4.5%
+        const recompensasBase = {
+            sin_rango: 258333,
+            AQUAN: 325000,
+            MEDUSA: 458333,
+            NESSY: 725000,
+            VULCAN: 1258333,
+            POSEIDON: 2325000
         };
 
-        document.getElementById('calcular').addEventListener('click', function() {
-            const resultado = document.getElementById('resultado');
-            const loader = document.getElementById('loader');
-            
+        // Función para calcular el 4.5%
+        const calcularPago = (recompensa) => Math.round(recompensa * 0.045);
+
+        // Cache de resultados para mejor rendimiento
+        const pagosCache = Object.fromEntries(
+            Object.entries(recompensasBase).map(([rango, recompensa]) => [
+                rango,
+                calcularPago(recompensa)
+            ])
+        );
+
+        // Elementos del DOM
+        const resultado = document.getElementById('resultado');
+        const loader = document.getElementById('loader');
+        const calcularBtn = document.getElementById('calcular');
+        const rangoSelect = document.getElementById('rangoSelect');
+
+        // Función optimizada para mostrar resultado
+        const mostrarResultado = (pago) => {
+            loader.classList.add('hidden');
+            resultado.textContent = `$${pago.toLocaleString()}`;
+            resultado.classList.remove('hidden');
+        };
+
+        // Event listener optimizado
+        calcularBtn.addEventListener('click', () => {
             resultado.classList.add('hidden');
             loader.classList.remove('hidden');
 
+            // Reducimos el tiempo de espera a 800ms para mejor UX
             setTimeout(() => {
-                const rango = document.getElementById('rangoSelect').value;
-                const pago = rangos[rango];
-                resultado.textContent = `Pago mensual: $${pago.toLocaleString()}`;
-                loader.classList.add('hidden');
-                resultado.classList.remove('hidden');
-            }, 3000);
+                const pago = pagosCache[rangoSelect.value];
+                mostrarResultado(pago);
+            }, 800);
         });
+
+        // Precarga de la imagen del select para mejor rendimiento
+        new Image().src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%234fc3f7'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E";
     </script>
 </body>
 </html>
