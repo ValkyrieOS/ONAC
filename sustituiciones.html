@@ -5,72 +5,192 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ONAC Bot Information</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
     <script>
       tailwind.config = {
         darkMode: "class",
         theme: {
           extend: {
             colors: {
-              primary: {
-                50: "#f0f9ff",
-                100: "#e0f2fe",
-                200: "#bae6fd",
-                300: "#7dd3fc",
-                400: "#38bdf8",
-                500: "#0ea5e9",
-                600: "#0284c7",
-                700: "#0369a1",
-                800: "#075985",
-                900: "#0c4a6e",
-                950: "#082f49",
-              },
-              secondary: {
-                50: "#fdf4ff",
-                100: "#fae8ff",
-                200: "#f5d0fe",
-                300: "#f0abfc",
-                400: "#e879f9",
-                500: "#d946ef",
-                600: "#c026d3",
-                700: "#a21caf",
-                800: "#86198f",
-                900: "#701a75",
-                950: "#4a044e",
-              },
+              "onac-blue": "#4fc3f7",
+              "onac-dark": "#1e293b",
             },
             fontFamily: {
-              sans: [
-                "Inter",
-                "ui-sans-serif",
-                "system-ui",
-                "-apple-system",
-                "Segoe UI",
-                "Roboto",
-                "Helvetica Neue",
-                "Arial",
-                "Noto Sans",
-                "sans-serif",
-              ],
+              onest: ["Onest", "sans-serif"],
             },
           },
         },
       };
     </script>
+    <style>
+      body {
+        font-family: "Onest", sans-serif;
+        background: #0f172a;
+      }
+
+      .auto-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+        padding: 1.5rem;
+        width: 100%;
+        max-width: 1800px;
+        margin: 0 auto;
+      }
+
+      .card {
+        position: relative;
+        height: 400px;
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        background: #1e293b;
+        border: 1px solid rgba(79, 195, 247, 0.1);
+        border-radius: 1.5rem;
+        overflow: hidden;
+      }
+
+      .card:hover {
+        transform: translateY(-8px);
+        border-color: rgba(79, 195, 247, 0.3);
+        box-shadow: 0 0 40px rgba(79, 195, 247, 0.15);
+      }
+
+      .image-zoom {
+        transition: all 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .card:hover .image-zoom {
+        transform: scale(1.15);
+      }
+
+      .content-reveal {
+        transform: translateY(20px);
+        opacity: 0;
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .card:hover .content-reveal {
+        transform: translateY(0);
+        opacity: 1;
+      }
+
+      @media (min-width: 768px) {
+        .auto-grid {
+          grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        }
+      }
+
+      @media (min-width: 1024px) {
+        .auto-grid {
+          grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        }
+      }
+    </style>
   </head>
-  <body class="bg-gray-950 text-gray-100 font-sans">
-    <div class="container mx-auto px-4 py-16">
-      <h1
-        class="text-5xl font-extrabold text-center mb-16 text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-secondary-400"
-      >
-        ONAC Bot Information
-      </h1>
-      <div
-        id="botInfo"
-        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-      ></div>
+  <body class="min-h-screen text-gray-100 font-onest">
+    <!-- Header con navegación -->
+    <header class="bg-gray-800/95 backdrop-blur-sm text-white py-6 sticky top-0 z-50 shadow-lg border-b border-gray-700/50">
+      <div class="container mx-auto px-4">
+        <div class="flex justify-between items-center">
+          <a href="index.html" class="flex items-center space-x-2 text-onac-blue hover:text-blue-400 transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            <span class="text-xl font-bold">Volver al Inicio</span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <div class="relative">
+      <!-- Sección de título -->
+      <header class="relative z-10 py-20 px-4">
+        <div class="max-w-4xl mx-auto text-center">
+          <h1 class="text-6xl font-black mb-6 tracking-tight">
+            <span class="bg-clip-text text-transparent bg-gradient-to-r from-onac-blue via-blue-400 to-onac-blue">
+              ONAC Bot
+            </span>
+          </h1>
+          <p class="text-xl text-onac-blue/80 max-w-3xl mx-auto leading-relaxed mb-8">
+            Sistema centralizado de automatización que integra y potencia las funcionalidades de múltiples bots
+          </p>
+          <div class="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-onac-blue/20">
+            <h2 class="text-onac-blue font-semibold mb-2">Sistema de Integración</h2>
+            <p class="text-gray-300">
+              ONAC Bot coordina múltiples bots para ofrecer una experiencia unificada y eficiente en tu servidor
+            </p>
+          </div>
+        </div>
+      </header>
+
+      <!-- Grid de bots -->
+      <main class="max-w-7xl mx-auto relative z-10 pb-20">
+        <div id="botInfo" class="auto-grid"></div>
+      </main>
     </div>
 
     <script>
+      function displayBotInfo(botData) {
+        if (!botData) {
+          document.getElementById("botInfo").innerHTML = '<p class="text-red-500 text-center">Error loading bot information.</p>';
+          return;
+        }
+
+        botData.integratedBots.sort((a, b) => (b.integrated ? 1 : 0) - (a.integrated ? 1 : 0));
+        
+        let html = "";
+        botData.integratedBots.forEach((bot) => {
+          const isIntegrated = bot.integrated;
+          
+          html += `
+            <div class="card group">
+              <div class="relative h-full">
+                <!-- Overlay gradiente mejorado -->
+                <div class="absolute inset-0 bg-gradient-to-t from-gray-900/95 via-gray-900/80 to-transparent opacity-80 z-10"></div>
+                
+                <!-- Imagen -->
+                <div class="absolute inset-0">
+                  <img 
+                    src="${bot.image}" 
+                    alt="${bot.name}" 
+                    class="w-full h-full object-cover image-zoom"
+                  />
+                </div>
+
+                <!-- Contenido -->
+                <div class="absolute inset-0 p-8 flex flex-col justify-end z-20">
+                  <!-- Badge -->
+                  <div class="flex gap-3 mb-4">
+                    <span class="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium backdrop-blur-md ${
+                      isIntegrated 
+                        ? 'bg-onac-blue/20 text-onac-blue border border-onac-blue/30' 
+                        : 'bg-purple-500/20 text-purple-200 border border-purple-400/30'
+                    }">
+                      ${isIntegrated ? 'Integrado con ONAC' : 'Próximamente'}
+                    </span>
+                  </div>
+
+                  <!-- Título y descripción -->
+                  <div class="space-y-4">
+                    <h2 class="text-3xl font-bold text-white group-hover:text-onac-blue transition-colors duration-300">
+                      ${bot.name}
+                    </h2>
+                    <p class="text-gray-300 leading-relaxed content-reveal text-lg group-hover:text-white transition-colors duration-300">
+                      ${bot.functions}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          `;
+        });
+
+        document.getElementById("botInfo").innerHTML = html;
+      }
+
+      // Mantener fetchBotData y event listener igual
       async function fetchBotData() {
         try {
           const response = await fetch("data/onac_bot_info.json");
@@ -80,65 +200,6 @@
           console.error("Error fetching bot data:", error);
           return null;
         }
-      }
-
-      function displayBotInfo(botData) {
-        const botInfoContainer = document.getElementById("botInfo");
-
-        if (!botData) {
-          botInfoContainer.innerHTML =
-            '<p class="text-red-500 text-center">Error loading bot information.</p>';
-          return;
-        }
-
-        // Sort bots so integrated ones appear first
-        botData.integratedBots.sort(
-          (a, b) => (b.integrated ? 1 : 0) - (a.integrated ? 1 : 0)
-        );
-
-        let html = "";
-
-        botData.integratedBots.forEach((bot) => {
-          const isIntegrated = bot.integrated;
-          html += `
-                    <div class="group relative bg-gray-900 rounded-2xl overflow-hidden shadow-lg transition-all duration-300 ease-in-out hover:shadow-2xl hover:-translate-y-2 hover:z-10">
-                        <div class="absolute inset-0 bg-gradient-to-br ${
-                          isIntegrated
-                            ? "from-primary-600/20 to-secondary-600/20"
-                            : "from-gray-800/20 to-gray-700/20"
-                        } opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                        <div class="relative h-72 overflow-hidden">
-                            <img src="${bot.image}" alt="${
-            bot.name
-          }" class="w-full h-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-110">
-                            <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/70 to-transparent opacity-70 group-hover:opacity-80 transition-opacity duration-300"></div>
-                            <div class="absolute bottom-4 left-4 right-4 z-10">
-                                <h2 class="text-3xl font-bold mb-2 text-white group-hover:text-primary-300 transition-colors duration-300">${
-                                  bot.name
-                                }</h2>
-                                <span class="inline-block px-3 py-1 text-xs font-bold rounded-full ${
-                                  isIntegrated
-                                    ? "bg-primary-500 text-primary-950"
-                                    : "bg-secondary-500 text-secondary-950"
-                                } transition-all duration-300 ease-in-out group-hover:scale-105">
-                                    ${
-                                      isIntegrated
-                                        ? "Integrated"
-                                        : "Coming Soon"
-                                    }
-                                </span>
-                            </div>
-                        </div>
-                        <div class="p-6 relative z-10 bg-gray-900 group-hover:bg-gray-800 transition-colors duration-300">
-                            <p class="text-gray-300 group-hover:text-white transition-colors duration-300">${
-                              bot.functions
-                            }</p>
-                        </div>
-                    </div>
-                `;
-        });
-
-        botInfoContainer.innerHTML = html;
       }
 
       document.addEventListener("DOMContentLoaded", async () => {
